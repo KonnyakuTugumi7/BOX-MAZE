@@ -9,7 +9,7 @@
 #include "../../GameEngine/Camera/camera_base.h"
 
 //生成
-BoardSP CBoard::Create( const int width , const int height , const std::string path )
+BoardSP CBoard::Create( const int width , const int height , const std::string path  , const CGraphicsManager::RENDERLIST_STATE list )
 {
 	//ボード
 	BoardSP board = std::make_shared< CBoard >();
@@ -18,7 +18,7 @@ BoardSP CBoard::Create( const int width , const int height , const std::string p
 	board->Init( width , height , path );
 
 	//レンダリングリストへの登録
-	CGraphicsManager::RegistObj( board , CGraphicsManager::NORMAL_3D );
+	CGraphicsManager::RegistObj( board , list );
 
 	return board;
 }

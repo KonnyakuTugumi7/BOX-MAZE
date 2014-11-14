@@ -32,6 +32,8 @@ void CSceneTitle::SceneInit()
 	//”wŒi
 	m_back = CSprite::Create( "Content/graphics/title.jpg" , CGraphicsManager::BACK_2D );
 	m_back->m_pos = D3DXVECTOR3( m_csv->GetToken< int >( 0 , 0 ) , m_csv->GetToken< int >( 0 , 1 ) , 0 );
+	//m_board = CBoard::Create( /*50*/80 , /*50*/60 , "Content/graphics/title.jpg" , CGraphicsManager::BACK_2D );
+	//m_board->m_pos = D3DXVECTOR3( /*m_csv->GetToken< int >( 0 , 0 )*/0 , /*m_csv->GetToken< int >( 0 , 1 )10*/10 , 25 );
 
 	//ƒƒS(ƒ^ƒCƒgƒ‹)
 	//m_logo[ 0 ] = CSprite::Create( "Content/graphics/titlelogo.png" , CGraphicsManager::FRONT_2D );

@@ -27,14 +27,13 @@ CCubeManager::CCubeManager( const std::string file_path )
 				//ブロックなし
 				if( m_csv_platinum->GetToken< int >( m_csv_platinum->GetLayerIdx( y ) + z , x ) == CUBE_STATE::NON ) 
 				{
-					CubeSP cube = CCube::Create( D3DXVECTOR3( 5 , 5 , 5 ) /*, "Content/csv/CubeData03.csv"*/ );
+					CubeSP cube = CCube::Create( D3DXVECTOR3( 5 , 5 , 5 ) );
 					cube->m_pos = D3DXVECTOR3( x * 5 , y * 5 , z * 5 );
 					pos1.push_back( D3DXVECTOR3( x * 5 , y * 5 , z * 5 ) );
 					cube->SetIsRender( false );
 					cube->SetIsCollision( false );
 					cube->SetCubeState( CUBE_STATE::NON );
 					cube1.push_back( cube );
-					//continue;
 				}
 
 				//スタートブロック
@@ -77,4 +76,22 @@ CCubeManager::CCubeManager( const std::string file_path )
 		m_cubes.push_back( cube2 );
 		m_cubes_pos.push_back( pos2 );
 	}
+}
+
+//指定した種類のキューブがいくつあるか検索
+int CCubeManager::FindSpecifiedCubeNum( const CUBE_STATE cube )
+{
+	int num = 0;
+	//検索
+	for( int x = 0 ; x < m_cubes.size() ; ++x )
+	{
+		for( int y = 0 ; y < m_cubes[ x ].size() ; ++y )
+		{
+			for( int z = 0 ; z < m_cubes[ x ][ y ].size() ; ++z )
+			{
+				if( m_cubes[ x ][ y ][ z ]->GetCubeState() == cube ) ++num;
+			}
+		}
+	}
+	return num;
 }

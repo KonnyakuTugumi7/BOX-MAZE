@@ -1,0 +1,74 @@
+﻿2014/11/14 18:27:55 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\EmptyProject_2010.vcxproj" (build ターゲット)。
+     1>InitializeBuildStatus:
+         "AlwaysCreate" が指定されたため "Release\EmptyProject.unsuccessfulbuild" を作成しています。
+       ClCompile:
+         すべての出力が最新のものです。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IDXUT\Core /IDXUT\Optional /Zi /nologo /W4 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D D3DXFX_LARGEADDRESS_HANDLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /openmp- /Yu"DXUT.h" /Fp"Release\EmptyProject.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Program\GameEngine\Graphic\cube.cpp Program\GameEngine\Graphic\cube_manager.cpp Program\GameEngine\Scene\scene_manager.cpp Program\Game\Scene\scene_edit.cpp Program\Game\Scene\scene_play.cpp Program\Game\Scene\scene_title.cpp program\Main.cpp  
+         cube.cpp
+         cube_manager.cpp
+         scene_manager.cpp
+         scene_edit.cpp
+         scene_play.cpp
+         scene_title.cpp
+         Main.cpp
+       ResourceCompile:
+         すべての出力が最新のものです。
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\Release\EmptyProject.exe" /INCREMENTAL:NO /NOLOGO d3dx10.lib d3dx9.lib dxerr.lib dxguid.lib winmm.lib comctl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\EmptyProject.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\Release\EmptyProject.pdb" /SUBSYSTEM:WINDOWS /LARGEADDRESSAWARE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\Release\EmptyProject.lib" /MACHINE:X86 Release\EmptyProject.res
+         Release\SDKsound.obj
+         Release\SDKwavefile.obj
+         Release\camera_base.obj
+         Release\collision_manager.obj
+         Release\board.obj
+         Release\cube.obj
+         Release\cube_manager.obj
+         Release\sprite.obj
+         Release\xfile.obj
+         Release\scene_manager.obj
+         Release\fp_camera.obj
+         Release\tp_camera.obj
+         Release\user_interface.obj
+         Release\scene_edit.obj
+         Release\scene_fade.obj
+         Release\scene_play.obj
+         Release\scene_title.obj
+         Release\animation.obj
+         Release\font.obj
+         Release\graphics_manager.obj
+         Release\graphic_base.obj
+         Release\mesh.obj
+         Release\shader_base.obj
+         Release\shader_depth_buffer_shadow.obj
+         Release\shader_directional_light.obj
+         Release\shader_lambert.obj
+         Release\texture.obj
+         Release\transform.obj
+         Release\input.obj
+         Release\sound.obj
+         Release\sound_manager.obj
+         Release\common.obj
+         Release\csv.obj
+         Release\Main.obj
+         Release\DXUT.obj
+         Release\DXUTenum.obj
+         Release\DXUTmisc.obj
+         Release\DXUTcamera.obj
+         Release\DXUTgui.obj
+         Release\DXUTres.obj
+         Release\DXUTsettingsdlg.obj
+         Release\SDKmesh.obj
+         Release\SDKmisc.obj  
+         コード生成しています。
+         コード生成が終了しました。
+         EmptyProject_2010.vcxproj -> C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\Release\EmptyProject.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\Release\EmptyProject.exe;#1" /manifest Release\EmptyProject.exe.intermediate.manifest "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\Include\Manifest\dpiaware.manifest"
+       FinalizeBuildStatus:
+         ファイル "Release\EmptyProject.unsuccessfulbuild" を削除しています。
+         "Release\EmptyProject.lastbuildstate" のタッチ タスクを実行しています。
+     1>プロジェクト "C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\EmptyProject_2010.vcxproj" (build ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+
+経過時間 00:00:13.24

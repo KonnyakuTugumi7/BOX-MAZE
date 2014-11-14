@@ -19,6 +19,10 @@ void CCsv::ImportFile( const std::string& file_path )
 
 	//開けていなかったらエラーを返す
 	if( !fin.is_open() ) assert( 0 );
+	////出力ストリーム
+	//std::ofstream fout;
+	//fout.open( file_path , std::ios::trunc );
+	//return;
 
 	//次の列
 	std::string new_line;

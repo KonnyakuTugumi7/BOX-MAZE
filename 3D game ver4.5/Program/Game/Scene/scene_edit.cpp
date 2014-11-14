@@ -83,7 +83,8 @@ void CSceneEdit::SceneFrameMove( const float elapsed_time )
 	m_pos = m_camera->GetViewTarget();
 
 	//タイトルへ
-	if( K_B->KeyPressed( K_B->KEY_ENTER ) )
+	//スタートブロックとゴールブロックの数が1なら
+	if( K_B->KeyPressed( K_B->KEY_ENTER ) && m_cube_manager->FindSpecifiedCubeNum( CCubeManager::CUBE_STATE::START ) == 1 && m_cube_manager->FindSpecifiedCubeNum( CCubeManager::CUBE_STATE::GOAL ) == 1 )
 	{
 		CSoundManager::Play( "Content/sound/fade.wav" , CSoundManager::MODE_ONCE );
 		CSceneManager::GetInstance()->SetNextScene( &CSceneTitle::CreateScene );

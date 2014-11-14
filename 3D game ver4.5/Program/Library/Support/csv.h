@@ -95,6 +95,16 @@ public:
 		return true;
 	}
 
+	//トークン検索(指定のトークンがいくつ存在するか)
+	//引数1:検索するトークン
+	//戻り値:指定のトークンの数
+	virtual int FindSpecifiedTokenNum( const std::string token )
+	{
+		int num = 0;
+		for( int line = 0 ; line < GetNumLine() ; ++line ) num += std::count( m_csv_table[ line ].begin() , m_csv_table[ line ].end() , token );
+		return num;
+	}
+
 	//トークンゲッター
 	//引数1:行 , 引数2:列
 	//戻り値:トークン

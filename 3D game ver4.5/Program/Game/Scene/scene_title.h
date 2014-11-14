@@ -4,6 +4,7 @@
 #include "../../Library/Support/csv.h"
 #include "../../GameEngine/Scene/scene_base.h"
 #include "../../GameEngine/Graphic/sprite.h"
+#include "../../GameEngine/Graphic/board.h"
 #include <string>
 #include <memory>
 
@@ -38,8 +39,9 @@ private:
 	//タイトル管理番号
 	int m_scene_num;
 
-	////タイトル画像
+	//タイトル画像
 	SpriteSP m_back;// , m_logo[ 4 ];
+	//BoardSP m_board;
 
 	//タイトルロゴ
 	FontSP m_logo[ 3 ];

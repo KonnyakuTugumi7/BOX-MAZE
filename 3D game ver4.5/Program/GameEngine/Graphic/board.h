@@ -2,6 +2,7 @@
 
 #include "DXUT.h"
 #include "../../Library/Graphic/graphic_base.h"
+#include "../../Library/Graphic/graphics_manager.h"
 #include <memory>
 #include <string>
 
@@ -40,8 +41,8 @@ public:
 	~CBoard(){}
 
 	//生成
-	//引数1:ボードの幅 , 引数2:ボードの高さ , 引数3:テクスチャパス
-	static BoardSP Create( const int width , const int height , const std::string path = "" );
+	//引数1:ボードの幅 , 引数2:ボードの高さ , 引数3:テクスチャパス , 引数4:レンダリングリストの種類
+	static BoardSP Create( const int width , const int height , const std::string path = "" , const CGraphicsManager::RENDERLIST_STATE list = CGraphicsManager::NORMAL_3D );
 
 	//初期化
 	//引数1:ボードの幅 , 引数2:ボードの高さ , 引数3:テクスチャパス

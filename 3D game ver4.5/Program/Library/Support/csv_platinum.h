@@ -37,17 +37,10 @@ private:
 	std::vector< int > m_layer_idx;
 
 public:
-	////コンストラクタ
-	//CCsvPlatinum() : m_width( 0 ) , 
-	//				 m_depth( 0 ) , 
-	//				 m_chip_width( 0 ) , 
-	//				 m_chip_height( 0 ) , 
-	//				 m_layer_num( 0 )
-	//{
-	//	m_path = ""; 
-	//}
+	//コンストラクタ(新しくステージを作るとき)
+	CCsvPlatinum(){}
 
-	//コンストラクタ
+	//コンストラクタ(既にあるステージの時)
 	//引数1:ファイルパス
 	CCsvPlatinum( const std::string& file_path )
 	{
@@ -87,54 +80,16 @@ public:
 	//引数1:ファイルパス
 	static CsvPlatinumSP Create( const std::string& file_path ){ return std::make_shared< CCsvPlatinum >( file_path ); }
 
-	////トークンセッター
-	////引数1:行 , 引数2:列 , 引数3:レイヤー番号 引数4:トークン
-	//void SetToken( const int line , const int row , const int layer , const std::string& token )
-	//{
-	//	int layer_idx = GetLayerIdx( layer );
-
-	//	//指定セルが正しいかどうか
-	//	if( !IsValidPos( line , layer_idx + row ) )
-	//	{
-	//		//セルを確保
-	//		//現在のラインより指定ラインが大きかったら
-	//		if( m_csv_table.size() < line + 1 ) m_csv_table.resize( ( line + 1 ) );
-	//		m_csv_table[ line ].resize( layer_idx + row + 1 );
-	//	}
-
-	//	//イテレータ
-	//	std::vector< std::string >::iterator it = m_csv_table[ line ].begin() + layer_idx + row;
-
-	//	//トークンをセット
-	//	m_csv_table[ line ].insert( it , 1 , token );
-
-	//	//std::vectorのinsert関数はイテレータが指す場所の直前に値を挿入するので
-	//	//挿入されたセルの1つ次のセルがにエンプティートークンが入っていたら削除する
-	//	std::string empty = m_csv_table[ line ][ layer_idx + row + 1 ];
-	//	if( empty == "" )
-	//	{
-	//		EraseToken( line , row + 1 , layer );
-	//	}
-	//}
-
-	////トークンオールイレーサー
-	//void EraseToken()
-	//{
-	//	m_csv_table.clear();
-	//}
-
-	////トークンイレーサー
-	////引数1:行 , 引数2:列 , 引数3:レイヤー番号
-	//void EraseToken( const int line , const int row , const int layer )
-	//{
-	//	int layer_idx = GetLayerIdx( layer );
-
-	//	//イテレータ
-	//	std::vector< std::string >::iterator it = m_csv_table[ line ].begin() + layer_idx + row;
-
-	//	//削除
-	//	it = m_csv_table[ line ].erase( it );
-	//}
+	//トークン検索(指定のトークンがいくつ存在するか)
+	//引数1:検索するトークン
+	//戻り値:指定のトークンの数
+	virtual int FindSpecifiedTokenNum( const std::string token )
+	{
+		int num = 0;
+		for( int line = 1 ; line < GetNumLine() ; ++line ) num += std::count( m_csv_table[ line ].begin() , m_csv_table[ line ].end() , token );
+		
+		return num;
+	}
 
 	//レイヤーインデックスゲッター
 	//引数1:レイヤー番号

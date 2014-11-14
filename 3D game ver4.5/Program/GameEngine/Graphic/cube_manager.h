@@ -60,13 +60,8 @@ public:
 	//引数1:ファイルパス
 	static CubeManagerSP Create( const std::string file_path ){ return std::make_shared< CCubeManager >( file_path ); }
 
-	//キューブ生成
-	//引数1:ファイルパス
-	CubeSP CreateCube( const std::string file_path )
-	{
-		CubeSP cube = CCube::Create( D3DXVECTOR3( 5 , 5 , 5 ) , file_path );
-		return cube;
-	}
+	//指定した種類のキューブがいくつあるか検索
+	int FindSpecifiedCubeNum( const CUBE_STATE cube );
 
 	//ステージ名ゲッター
 	std::string GetStageName(){ return m_stage_name; }
