@@ -1,0 +1,12 @@
+//fovx
+80.0
+//znear
+1.0
+//zfar
+1000
+//eye.y , eye.z
+10 , -10
+//target.y
+10
+//rot_speed
+2.0

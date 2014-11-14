@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns:atg="http://atg.xbox.com" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{8e114980-c1a3-4ada-ad7c-83caadf5daeb}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="DXUT">
+      <UniqueIdentifier>{a43c5c25-0e86-4a20-b64a-883785ff74fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{2c3d4c8c-5d1a-459a-a05a-a4e4b608a44e}</UniqueIdentifier>
+      <Extensions>fx;fxh;hlsl</Extensions>
+    </Filter>
+    <Filter Include="Program">
+      <UniqueIdentifier>{4b729b8e-c780-40aa-963a-fcf0029a88ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program\Game">
+      <UniqueIdentifier>{65e7b0b4-aef5-4a0c-bb9e-420ab1be5e9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program\GameEngine">
+      <UniqueIdentifier>{edf88da9-f1d5-4479-ae39-eab7e10c57ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program\Library">
+      <UniqueIdentifier>{09f652ab-c59c-4436-86e0-dee9d0797a8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program\Game\Camera">
+      <UniqueIdentifier>{bb4423ed-5b03-4bf8-8854-dc6cc9ab2c42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program\Game\Scene">
+      <UniqueIdentifier>{3b510965-184f-4591-9d86-7a7cd1ae138a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program\Game\Object">
+      <UniqueIdentifier>{baaf9620-53a7-476a-8993-336d6b1f2f71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program\GameEngine\Collision">
+      <UniqueIdentifier>{e3aca9f9-986e-4b1f-b358-18df45f2a3f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program\Library\Graphic">
+      <UniqueIdentifier>{155dc40f-8c04-4f37-9bdb-141b8659fa2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program\Library\Input">
+      <UniqueIdentifier>{b530220a-0398-446b-9f49-2e00249a50bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program\Library\Support">
+      <UniqueIdentifier>{e64aa429-9969-4edf-a5cf-bc0357cf8e91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program\Library\Sound">
+      <UniqueIdentifier>{cb2cb311-9f3a-45a5-aa3b-6254a0c41852}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program\GameEngine\Scene">
+      <UniqueIdentifier>{d84b39fd-8b9e-4dec-a414-4d25a6c1cdcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program\GameEngine\Graphic">
+      <UniqueIdentifier>{1762118b-99e7-4839-99ed-e9efd7ae0ead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Program\GameEngine\Camera">
+      <UniqueIdentifier>{55adde9c-38e9-4fae-9953-21fe7d8908ea}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DXUT\Optional\directx.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <ClInclude Include="DXUT\Core\DXUT.h">
+      <Filter>DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUT\Core\DXUTenum.h">
+      <Filter>DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUT\Core\DXUTmisc.h">
+      <Filter>DXUT</Filter>
+    </ClInclude>
+    <ClCompile Include="DXUT\Core\DXUT.cpp">
+      <Filter>DXUT</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUT\Core\DXUTenum.cpp">
+      <Filter>DXUT</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUT\Core\DXUTmisc.cpp">
+      <Filter>DXUT</Filter>
+    </ClCompile>
+    <ClInclude Include="DXUT\Optional\DXUTcamera.h">
+      <Filter>DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUT\Optional\DXUTgui.h">
+      <Filter>DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUT\Optional\DXUTres.h">
+      <Filter>DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUT\Optional\DXUTsettingsdlg.h">
+      <Filter>DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUT\Optional\SDKmesh.h">
+      <Filter>DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUT\Optional\SDKmisc.h">
+      <Filter>DXUT</Filter>
+    </ClInclude>
+    <ClCompile Include="DXUT\Optional\DXUTcamera.cpp">
+      <Filter>DXUT</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUT\Optional\DXUTgui.cpp">
+      <Filter>DXUT</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUT\Optional\DXUTres.cpp">
+      <Filter>DXUT</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUT\Optional\DXUTsettingsdlg.cpp">
+      <Filter>DXUT</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUT\Optional\SDKmesh.cpp">
+      <Filter>DXUT</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUT\Optional\SDKmisc.cpp">
+      <Filter>DXUT</Filter>
+    </ClCompile>
+    <None Include="hlsl\simple.fx">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DXUT\Optional\SDKsound.cpp">
+      <Filter>DXUT</Filter>
+    </ClCompile>
+    <ClCompile Include="DXUT\Optional\SDKwavefile.cpp">
+      <Filter>DXUT</Filter>
+    </ClCompile>
+    <ClCompile Include="program\Main.cpp">
+      <Filter>Program</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\Scene\scene_play.cpp">
+      <Filter>Program\Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\Scene\scene_title.cpp">
+      <Filter>Program\Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\GameEngine\Collision\collision_manager.cpp">
+      <Filter>Program\GameEngine\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Library\Graphic\font.cpp">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Library\Graphic\mesh.cpp">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Library\Graphic\texture.cpp">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Library\Graphic\transform.cpp">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Library\Input\input.cpp">
+      <Filter>Program\Library\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Library\Sound\sound.cpp">
+      <Filter>Program\Library\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Library\Sound\sound_manager.cpp">
+      <Filter>Program\Library\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Library\Support\common.cpp">
+      <Filter>Program\Library\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\GameEngine\Scene\scene_manager.cpp">
+      <Filter>Program\GameEngine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Library\Graphic\animation.cpp">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\GameEngine\Graphic\board.cpp">
+      <Filter>Program\GameEngine\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\GameEngine\Graphic\cube.cpp">
+      <Filter>Program\GameEngine\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Library\Graphic\graphics_manager.cpp">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\Camera\fp_camera.cpp">
+      <Filter>Program\Game\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\GameEngine\Camera\camera_base.cpp">
+      <Filter>Program\GameEngine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\Camera\tp_camera.cpp">
+      <Filter>Program\Game\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\GameEngine\Graphic\cube_manager.cpp">
+      <Filter>Program\GameEngine\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Library\Support\csv.cpp">
+      <Filter>Program\Library\Support</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Library\Graphic\graphic_base.cpp">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\GameEngine\Graphic\sprite.cpp">
+      <Filter>Program\GameEngine\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\Scene\scene_fade.cpp">
+      <Filter>Program\Game\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\GameEngine\Graphic\xfile.cpp">
+      <Filter>Program\GameEngine\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\Object\user_interface.cpp">
+      <Filter>Program\Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Library\Graphic\shader_base.cpp">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Library\Graphic\shader_depth_buffer_shadow.cpp">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Library\Graphic\shader_directional_light.cpp">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Library\Graphic\shader_lambert.cpp">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Game\Scene\scene_edit.cpp">
+      <Filter>Program\Game\Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DXUT\Optional\SDKsound.h">
+      <Filter>DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="DXUT\Optional\SDKwavefile.h">
+      <Filter>DXUT</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\Scene\scene_play.h">
+      <Filter>Program\Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\Scene\scene_title.h">
+      <Filter>Program\Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\GameEngine\Collision\collision_manager.h">
+      <Filter>Program\GameEngine\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Graphic\font.h">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Graphic\graphics_manager.h">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Graphic\material.h">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Graphic\mesh.h">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Graphic\texture.h">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Graphic\transform.h">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Input\input.h">
+      <Filter>Program\Library\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Sound\sound.h">
+      <Filter>Program\Library\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Sound\sound_manager.h">
+      <Filter>Program\Library\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Support\common.h">
+      <Filter>Program\Library\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\GameEngine\Scene\scene_base.h">
+      <Filter>Program\GameEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\GameEngine\Scene\scene_manager.h">
+      <Filter>Program\GameEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Graphic\animation.h">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Graphic\vertex.h">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Graphic\shader_base.h">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Graphic\shader_lambert.h">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Graphic\shader_depth_buffer_shadow.h">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Graphic\shader_directional_light.h">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\GameEngine\Graphic\board.h">
+      <Filter>Program\GameEngine\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\GameEngine\Graphic\cube.h">
+      <Filter>Program\GameEngine\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\Camera\fp_camera.h">
+      <Filter>Program\Game\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\GameEngine\Camera\camera_base.h">
+      <Filter>Program\GameEngine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\Camera\tp_camera.h">
+      <Filter>Program\Game\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\GameEngine\Graphic\cube_manager.h">
+      <Filter>Program\GameEngine\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Support\csv.h">
+      <Filter>Program\Library\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Support\csv_platinum.h">
+      <Filter>Program\Library\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Graphic\graphic_base.h">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\GameEngine\Graphic\sprite.h">
+      <Filter>Program\GameEngine\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\Scene\scene_fade.h">
+      <Filter>Program\Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Support\time.h">
+      <Filter>Program\Library\Support</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\GameEngine\Graphic\xfile.h">
+      <Filter>Program\GameEngine\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\Object\user_interface.h">
+      <Filter>Program\Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Game\Scene\scene_edit.h">
+      <Filter>Program\Game\Scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CLInclude Include="resource.h">
+      <Filter>Resource Files</Filter>
+    </CLInclude>
+    <ResourceCompile Include="EmptyProject.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>
