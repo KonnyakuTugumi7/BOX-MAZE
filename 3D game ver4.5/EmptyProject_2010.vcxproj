@@ -400,6 +400,8 @@
     <ClCompile Include="Program\Game\Scene\scene_play.cpp" />
     <ClCompile Include="Program\Game\Scene\scene_title.cpp" />
     <ClCompile Include="Program\Library\Graphic\animation.cpp" />
+    <ClCompile Include="Program\Library\Graphic\BillboardChar.cpp" />
+    <ClCompile Include="Program\Library\Graphic\BillboardString.cpp" />
     <ClCompile Include="Program\Library\Graphic\font.cpp" />
     <ClCompile Include="Program\Library\Graphic\graphics_manager.cpp" />
     <ClCompile Include="Program\Library\Graphic\graphic_base.cpp" />
@@ -461,6 +463,8 @@
     <ClInclude Include="Program\Game\Scene\scene_play.h" />
     <ClInclude Include="Program\Game\Scene\scene_title.h" />
     <ClInclude Include="Program\Library\Graphic\animation.h" />
+    <ClInclude Include="Program\Library\Graphic\BillboardChar.h" />
+    <ClInclude Include="Program\Library\Graphic\BillboardString.h" />
     <ClInclude Include="Program\Library\Graphic\font.h" />
     <ClInclude Include="Program\Library\Graphic\graphics_manager.h" />
     <ClInclude Include="Program\Library\Graphic\graphic_base.h" />

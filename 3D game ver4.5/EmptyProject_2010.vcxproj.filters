@@ -223,6 +223,12 @@
     <ClCompile Include="Program\Game\Scene\scene_edit.cpp">
       <Filter>Program\Game\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Program\Library\Graphic\BillboardChar.cpp">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="Program\Library\Graphic\BillboardString.cpp">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DXUT\Optional\SDKsound.h">
@@ -338,6 +344,12 @@
     </ClInclude>
     <ClInclude Include="Program\Game\Scene\scene_edit.h">
       <Filter>Program\Game\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Graphic\BillboardChar.h">
+      <Filter>Program\Library\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="Program\Library\Graphic\BillboardString.h">
+      <Filter>Program\Library\Graphic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

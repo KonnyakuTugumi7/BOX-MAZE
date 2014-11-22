@@ -2,11 +2,13 @@
 
 #include "DXUT.h"
 #include "../../Library/Support/csv.h"
+#include "../../Library/Graphic/BillboardString.h"
 #include "../../GameEngine/Scene/scene_base.h"
 #include "../../GameEngine/Graphic/sprite.h"
 #include "../../GameEngine/Graphic/board.h"
 #include <string>
 #include <memory>
+#include <vector>
 
 #pragma warning( disable : 4244 )
 
@@ -40,11 +42,10 @@ private:
 	int m_scene_num;
 
 	//タイトル画像
-	SpriteSP m_back;// , m_logo[ 4 ];
-	//BoardSP m_board;
+	SpriteSP m_back;
 
 	//タイトルロゴ
-	FontSP m_logo[ 3 ];
+	std::vector< BillboardStringSP > m_logo;
 
 public:
 	//インスタンス作成

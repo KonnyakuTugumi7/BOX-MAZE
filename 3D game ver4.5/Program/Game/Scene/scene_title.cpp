@@ -32,29 +32,6 @@ void CSceneTitle::SceneInit()
 	//背景
 	m_back = CSprite::Create( "Content/graphics/title.jpg" , CGraphicsManager::BACK_2D );
 	m_back->m_pos = D3DXVECTOR3( m_csv->GetToken< int >( 0 , 0 ) , m_csv->GetToken< int >( 0 , 1 ) , 0 );
-	//m_board = CBoard::Create( /*50*/80 , /*50*/60 , "Content/graphics/title.jpg" , CGraphicsManager::BACK_2D );
-	//m_board->m_pos = D3DXVECTOR3( /*m_csv->GetToken< int >( 0 , 0 )*/0 , /*m_csv->GetToken< int >( 0 , 1 )10*/10 , 25 );
-
-	//ロゴ(タイトル)
-	//m_logo[ 0 ] = CSprite::Create( "Content/graphics/titlelogo.png" , CGraphicsManager::FRONT_2D );
-	//m_logo[ 0 ]->m_pos = D3DXVECTOR3( m_csv->GetToken< int >( 1 , 0 ) , m_csv->GetToken< int >( 1 , 1 ) , 0 );
-	m_logo[ 0 ] = CFont::Create( 65 , 50 , 0 );
-	m_logo[ 2 ] = CFont::Create( 65 , 50 , 0 );
-
-	//ロゴ1(START)
-	//m_logo[ 1 ] = CSprite::Create( "Content/graphics/titlelogo1.png" , CGraphicsManager::FRONT_2D );
-	//m_logo[ 1 ]->m_pos = D3DXVECTOR3( m_csv->GetToken< int >( 2 , 0 ) , m_csv->GetToken< int >( 2 , 1 ) , 0 );
-	m_logo[ 1 ] = CFont::Create( 50 , 70 , 1 );
-
-	//ロゴ2(EDIT)
-	//m_logo[ 2 ] = CSprite::Create( "Content/graphics/titlelogo2.png" , CGraphicsManager::FRONT_2D );
-	//m_logo[ 2 ]->m_pos = D3DXVECTOR3( m_csv->GetToken< int >( 3 , 0 ) , m_csv->GetToken< int >( 3 , 1 ) , 0 );
-	//m_logo[ 2 ] = CFont::Create( 70 , 70 , 1 );
-
-	//ロゴ3(EXIT)
-	//m_logo[ 3 ] = CSprite::Create( "Content/graphics/titlelogo3.png" , CGraphicsManager::FRONT_2D );
-	//m_logo[ 3 ]->m_pos = D3DXVECTOR3( m_csv->GetToken< int >( 4 , 0 ) , m_csv->GetToken< int >( 4 , 1 ) , 0 );
-	//m_logo[ 3 ] = CFont::Create( 70 , 70 , 1 );
 
 	//シーンナンバー
 	m_scene_num = SCENE_NUM::PLAY;
@@ -64,6 +41,17 @@ void CSceneTitle::SceneInit()
 
 	//ステージ選択画面かどうか
 	m_is_stage_select = false;
+
+	//m_logo[ 0 ] = CBillboardString::Create( CGraphicsManager::m_pd3dDevice );
+	//m_logo.push_back( CBillboardString::Create( CGraphicsManager::m_pd3dDevice ) );
+	//m_logo[ 0 ]->SetFont( FACE_NAME::MS_MINCHOU.c_str() );
+	//m_logo[ 0 ]->SetMaxPixelSize( 150 );
+	for( int i = 0 ; i < 4 ; ++i )
+	{
+		m_logo.push_back( CBillboardString::Create( CGraphicsManager::m_pd3dDevice ) );
+		m_logo[ i ]->SetFont( FACE_NAME::MS_MINCHOU.c_str() );
+		m_logo[ i ]->SetMaxPixelSize( ( i == 0 ) ? 150 : 64 );
+	}
 }
 
 //解放処理
@@ -71,10 +59,7 @@ void CSceneTitle::SceneDelete()
 {
 	//解放
 	m_back.reset();
-	m_logo[ 0 ].reset();
-	m_logo[ 1 ].reset();
-	//m_logo[ 2 ].reset();
-	//m_logo[ 3 ].reset();
+	for( int i = 0 ; i < m_logo.size() ; ++i ) m_logo[ i ].reset();
 }
 
 //ロジック処理
@@ -93,65 +78,32 @@ void CSceneTitle::SceneFrameMove( const float elapsed_time )
 		m_scene_num += 1;
 	}
 
-	//メニュー画面ごとの入力処理
+	//メニュー画面ごとの処理
 	if( m_is_stage_select == false )
 	{
 		TitleInput();
+		m_logo[ 0 ]->RegistString( _T( "BOX MAZE" ) );
+		m_logo[ 1 ]->RegistString( _T( "START" ) );
+		m_logo[ 2 ]->RegistString( _T( "EDIT" ) );
+		m_logo[ 3 ]->RegistString( _T( "EXIT" ) );
+		m_logo[ 0 ]->SetColor( 0xFFFF0000 );
+		m_logo[ 0 ]->SetPosition( 100 , 50 );
 	}
 	else
 	{
 		StageSelectInput();
+		m_logo[ 0 ]->RegistString( _T( "BOX MAZE" ) );
+		m_logo[ 1 ]->RegistString( _T( "STAGE01" ) );
+		m_logo[ 2 ]->RegistString( _T( "STAGE02" ) );
+		m_logo[ 3 ]->RegistString( _T( "TITLE" ) );
+		m_logo[ 0 ]->SetColor( 0xFFFF0000 );
+		m_logo[ 0 ]->SetPosition( 100 , 50 );
 	}
-
-	//for( int i = 0 ; i < SCENE_NUM::SCENE_MAX ; ++i )
-	//{
-	//	//選択時透明度変更
-	//	//選択中
-	//	if( i == m_scene_num )
-	//	{
-	//		m_logo[ i + 1 ]->m_col = D3DXVECTOR4( 1 , 1 , 0 , 1 );
-	//	}
-	//	else
-	//	{
-	//		m_logo[ i + 1 ]->m_col = D3DXVECTOR4( m_csv->GetToken< float >( 5 , 0 ) , m_csv->GetToken< float >( 5 , 0 ) , m_csv->GetToken< float >( 5 , 0 ) , m_csv->GetToken< float >( 5 , 0 ) );
-	//	}
-	//}
-
-	////--------------------------------------選択移動--------------------------------------
-	//if( K_B->KeyPressed( K_B->KEY_UP ) )
-	//{
-	//	CSoundManager::Play( "Content/sound/cursor.wav" , CSoundManager::MODE_ONCE );
-	//	m_scene_num -= 1;
-	//}
-	//	
-	//if( K_B->KeyPressed( K_B->KEY_DOWN ) )
-	//{
-	//	CSoundManager::Play( "Content/sound/cursor.wav" , CSoundManager::MODE_ONCE );
-	//	m_scene_num += 1;
-	//}
-	////選択位置が限界まで達したら戻す
-	//if( m_scene_num <= SCENE_NUM::SCENE_MIN ) m_scene_num = SCENE_NUM::SCENE_MAX + SCENE_NUM::SCENE_MIN;	
-	//if( m_scene_num >= SCENE_NUM::SCENE_MAX ) m_scene_num = SCENE_NUM::PLAY;
-	//
-	////-------------------------------------------------実行(シーン移動)-------------------------------------------------
-	////インスタンス作成
-	////プレイへ
-	//if( K_B->KeyPressed( K_B->KEY_ENTER ) && m_scene_num == SCENE_NUM::PLAY )
-	//{
-	//	CSoundManager::Play( "Content/sound/fade.wav" , CSoundManager::MODE_ONCE );
-	//	CSceneManager::GetInstance()->SetNextScene( &CScenePlay::CreateScene );
-	//}
-	////エディットへ
-	//if( K_B->KeyPressed( K_B->KEY_ENTER ) && m_scene_num == SCENE_NUM::EDIT )
-	//{
-	//	CSoundManager::Play( "Content/sound/fade.wav" , CSoundManager::MODE_ONCE );
-	//	CSceneManager::GetInstance()->SetNextScene( &CSceneEdit::CreateScene );
-	//}
-	////終了
-	//if( K_B->KeyPressed( K_B->KEY_ENTER ) && m_scene_num == SCENE_NUM::EXIT )
-	//{
-	//	PostQuitMessage( WM_QUIT );
-	//}
+	for( int i = 1 ; i < m_logo.size() ; ++i )
+	{
+		m_logo[ i ]->SetPosition( 280 , ( i + 1 ) * 100 + 50 );
+		m_logo[ i ]->SetColor( m_scene_num == ( i - 1 ) ? 0xFFFFF000 : 0xFFFF0000 );
+	}
 }
 
 //描画処理
@@ -165,16 +117,10 @@ void CSceneTitle::SceneFrameRender( const float elapsed_time )
 	//描画
 	CGraphicsManager::SysRender( m_camera );
 
-	if( m_is_stage_select == false )
-	{
-		//タイトルメニュー描画
-		TitleRender();
-	}
-	else
-	{
-		//ステージ選択メニュー描画
-		StageSelectRender();
-	}
+	//ロゴ描画
+	CGraphicsManager::m_pd3dDevice->BeginScene();
+	for( int i = 0 ; i < m_logo.size() ; ++i ) m_logo[ i ]->Draw();
+	CGraphicsManager::m_pd3dDevice->EndScene();
 }
 
 //サウンド再生
@@ -199,18 +145,6 @@ void CSceneTitle::SceneStopSound()
 //プレイヤーの入力
 void CSceneTitle::TitleInput()
 {
-	////--------------------------------------選択移動--------------------------------------
-	//if( K_B->KeyPressed( K_B->KEY_UP ) )
-	//{
-	//	CSoundManager::Play( "Content/sound/cursor.wav" , CSoundManager::MODE_ONCE );
-	//	m_scene_num -= 1;
-	//}
-	//	
-	//if( K_B->KeyPressed( K_B->KEY_DOWN ) )
-	//{
-	//	CSoundManager::Play( "Content/sound/cursor.wav" , CSoundManager::MODE_ONCE );
-	//	m_scene_num += 1;
-	//}
 	//選択位置が限界まで達したら戻す
 	if( m_scene_num <= SCENE_NUM::SCENE_MIN ) m_scene_num = SCENE_NUM::SCENE_MAX + SCENE_NUM::SCENE_MIN;	
 	if( m_scene_num >= SCENE_NUM::SCENE_MAX ) m_scene_num = SCENE_NUM::PLAY;
@@ -248,48 +182,23 @@ void CSceneTitle::StageSelectInput()
 	
 	//-------------------------------------------------実行(シーン移動)-------------------------------------------------
 	//インスタンス作成
-	//Stage01のエディットへ
-	if( K_B->KeyPressed( K_B->KEY_ENTER ) && m_scene_num == STAGE_SELECT_NUM::STAGE01 )
+	if( K_B->KeyPressed( K_B->KEY_ENTER ) )
 	{
-		m_csv = CCsv::Create( "Content/csv/EditData.csv" );
-		m_csv->EraseToken( 2 , 0 );
-		m_csv->SetToken( 2 , 0 , "Content/csv/CubeManager01.csv" );
-		m_csv->ExportFile();
-		CSoundManager::Play( "Content/sound/fade.wav" , CSoundManager::MODE_ONCE );
-		CSceneManager::GetInstance()->SetNextScene( &CSceneEdit::CreateScene );
+		if( m_scene_num == STAGE_SELECT_NUM::TITLE )
+		{
+			m_scene_num = SCENE_NUM::PLAY;
+			m_is_stage_select = false;
+		}
+		else
+		{
+			m_csv = CCsv::Create( "Content/csv/EditData.csv" );
+			m_csv->EraseToken( 2 , 0 );
+			std::stringstream ss;
+			ss << "Content/csv/CubeManager0" << m_scene_num + 1 << ".csv";
+			m_csv->SetToken( 2 , 0 , ss.str() );
+			m_csv->ExportFile();
+			CSoundManager::Play( "Content/sound/fade.wav" , CSoundManager::MODE_ONCE );
+			CSceneManager::GetInstance()->SetNextScene( &CSceneEdit::CreateScene );
+		}
 	}
-	//Stage01のエディットへ
-	if( K_B->KeyPressed( K_B->KEY_ENTER ) && m_scene_num == STAGE_SELECT_NUM::STAGE02 )
-	{
-		m_csv = CCsv::Create( "Content/csv/EditData.csv" );
-		m_csv->EraseToken( 2 , 0 );
-		m_csv->SetToken( 2 , 0 , "Content/csv/CubeManager02.csv" );
-		m_csv->ExportFile();
-		CSoundManager::Play( "Content/sound/fade.wav" , CSoundManager::MODE_ONCE );
-		CSceneManager::GetInstance()->SetNextScene( &CSceneEdit::CreateScene );
-	}
-	//タイトル画面へ
-	if( K_B->KeyPressed( K_B->KEY_ENTER ) && m_scene_num == STAGE_SELECT_NUM::TITLE )
-	{
-		m_scene_num = SCENE_NUM::PLAY;
-		m_is_stage_select = false;
-	}
-}
-
-//タイトル画面描画
-void CSceneTitle::TitleRender()
-{
-	m_logo[ 0 ]->DrawFont( "BOX MAZE" , 150 , 100 , m_logo[ 0 ]->RED );
-	m_logo[ 1 ]->DrawFont( "START" , 250 , 200 , ( m_scene_num == SCENE_NUM::PLAY ? m_logo[ 1 ]->YELLOW : m_logo[ 1 ]->RED ) );
-	m_logo[ 1 ]->DrawFont( "EDIT" , 250 , 300 , ( m_scene_num == SCENE_NUM::EDIT ? m_logo[ 1 ]->YELLOW : m_logo[ 1 ]->RED ) );
-	m_logo[ 1 ]->DrawFont( "EXIT" , 250 , 400 , ( m_scene_num == SCENE_NUM::EXIT ? m_logo[ 1 ]->YELLOW : m_logo[ 1 ]->RED ) );
-}
-
-//ステージセレクト画面描画
-void CSceneTitle::StageSelectRender()
-{
-	m_logo[ 2 ]->DrawFont( "STAGE SELECT" , 0 , 50 , m_logo[ 0 ]->RED );
-	m_logo[ 1 ]->DrawFont( "STAGE01" , 200 , 200 , ( m_scene_num == SCENE_NUM::PLAY ? m_logo[ 1 ]->YELLOW : m_logo[ 1 ]->RED ) );
-	m_logo[ 1 ]->DrawFont( "STAGE02" , 200 , 300 , ( m_scene_num == SCENE_NUM::EDIT ? m_logo[ 1 ]->YELLOW : m_logo[ 1 ]->RED ) );
-	m_logo[ 1 ]->DrawFont( "TITLE" , 200 , 400 , ( m_scene_num == SCENE_NUM::EXIT ? m_logo[ 1 ]->YELLOW : m_logo[ 1 ]->RED ) );
 }

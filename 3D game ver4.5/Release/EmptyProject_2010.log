@@ -1,14 +1,13 @@
-﻿2014/11/14 18:27:55 にビルドを開始しました。
+﻿2014/11/22 13:34:35 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\EmptyProject_2010.vcxproj" (build ターゲット)。
      1>InitializeBuildStatus:
          "AlwaysCreate" が指定されたため "Release\EmptyProject.unsuccessfulbuild" を作成しています。
        ClCompile:
          すべての出力が最新のものです。
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IDXUT\Core /IDXUT\Optional /Zi /nologo /W4 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D D3DXFX_LARGEADDRESS_HANDLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /openmp- /Yu"DXUT.h" /Fp"Release\EmptyProject.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Program\GameEngine\Graphic\cube.cpp Program\GameEngine\Graphic\cube_manager.cpp Program\GameEngine\Scene\scene_manager.cpp Program\Game\Scene\scene_edit.cpp Program\Game\Scene\scene_play.cpp Program\Game\Scene\scene_title.cpp program\Main.cpp  
-         cube.cpp
-         cube_manager.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IDXUT\Core /IDXUT\Optional /Zi /nologo /W4 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D D3DXFX_LARGEADDRESS_HANDLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /openmp- /Yu"DXUT.h" /Fp"Release\EmptyProject.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Program\GameEngine\Scene\scene_manager.cpp Program\Game\Scene\scene_edit.cpp Program\Game\Scene\scene_fade.cpp Program\Game\Scene\scene_play.cpp Program\Game\Scene\scene_title.cpp program\Main.cpp  
          scene_manager.cpp
          scene_edit.cpp
+         scene_fade.cpp
          scene_play.cpp
          scene_title.cpp
          Main.cpp
@@ -34,6 +33,8 @@
          Release\scene_play.obj
          Release\scene_title.obj
          Release\animation.obj
+         Release\BillboardChar.obj
+         Release\BillboardString.obj
          Release\font.obj
          Release\graphics_manager.obj
          Release\graphic_base.obj
@@ -71,4 +72,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:13.24
+経過時間 00:00:31.54
