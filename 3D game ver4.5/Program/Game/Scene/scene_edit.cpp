@@ -29,6 +29,7 @@ void CSceneEdit::SceneInit()
 	//m_camera = CTPCamera::Create();
 	m_camera = CFPCamera::Create();
 	m_camera->SetIsGravity( false );
+	m_view_camera = CViewCamera::Create();
 
 	//BGMロード
 	//CSoundManager::Load( "Content/sound/play.wav" );
@@ -41,8 +42,6 @@ void CSceneEdit::SceneInit()
 
 	//キューブマネージャ初期化
 	m_cube_manager = CCubeManager::Create( m_csv->GetToken< std::string >( 2 , 0 ) );
-
-	m_font = CFont::Create( 20 , 20 );
 
 	//ターゲット座標
 	m_pos = D3DXVECTOR3( 0 , m_csv->GetToken< float >( 0 , 0 ) , 0 );
@@ -62,14 +61,31 @@ void CSceneEdit::SceneInit()
 
 	//マウスカーソルを表示
 	MOUSE->DisplayCursor( false );
+
+	m_csv = CCsv::Create( "Content/csv/EditCubeData.csv" );
+	for( int i = 0 ; i < m_csv->GetNumLine() ; ++i )
+	{
+		WCHAR wc_buff[ 255 ] = { 0 };
+		CCommon::DXconvAnsiToWide( wc_buff , m_csv->GetToken< std::string >( i , 0 ).c_str() , 255 );
+		m_logo.push_back( wc_buff );
+	}
+	//フォントを生成
+	m_font = CFont::Create();
+	if (m_font)
+	{
+		m_font->SetSize( 30.0f , 20.0f );
+		m_font->SetAlign( CFont::LEFT );
+		for( int i = 0 ; i < m_logo.size() ; ++i ) m_font->CreateTexture( 128 , 512 , ( i == 0 ) ? FontType::MS_GOTHIC : FontType::MS_MINCHOU , m_logo[ i ] );
+	}
+
+	m_csv = CCsv::Create( "Content/csv/EditData.csv" );
+
+	m_debug_font = CDebugFont::Create( 30 , 30 );
 }
 
 //解放処理
 void CSceneEdit::SceneDelete()
 {
-	//解放
-	m_font.reset();
-
 	//ステージデータ書き出し
 	SceneExport();
 	m_cube_manager.reset();
@@ -107,12 +123,12 @@ void CSceneEdit::SceneFrameRender( const float elapsed_time )
 	// 画面のクリア																	  //画面の色
 	V( CGraphicsManager::m_pd3dDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB( 255 , 0 , 0 , 0/*255, 0, 0, 255*/ ), 1.0f, 0 ) );
 
+	//for( int i = 0 ; i < m_logo.size() ; ++i ) if( i == m_select_cube_state ) m_font->Draw( m_view_camera , m_logo[ i ] , D3DXVECTOR2( 50.0f , 20.0f ) , D3DXVECTOR4( Color::RED , 1.0f ) );
+
 	//描画
 	CGraphicsManager::SysRender( m_camera );
 
 	std::stringstream ss;
-	//ss << DXUTGetFPS();
-	//m_font->DrawFont( ss.str() , 100 , 100 , m_font->RED );
 
 	if( m_select_cube_state == CCubeManager::NON )
 	{
@@ -131,8 +147,7 @@ void CSceneEdit::SceneFrameRender( const float elapsed_time )
 		ss << "NORMAL CUBE";
 	}
 
-	
-	m_font->DrawFont( ss.str() , 20 , 20 , m_font->RED );
+	m_debug_font->DrawFont( ss.str() , 20 , 20 , m_debug_font->RED );
 }
 
 //サウンド再生

@@ -5,6 +5,7 @@
 #include "../../GameEngine/Graphic/sprite.h"
 #include "../../GameEngine/Scene/scene_base.h"
 #include "../../GameEngine/Camera/camera_base.h"
+#include "../../Game/Camera/view_camera.h"
 #include "../../GameEngine/Graphic/cube_manager.h"
 #include "../../GameEngine/Graphic/cube.h"
 #include <map>
@@ -25,6 +26,14 @@ private:
 
 	//画面中央の十字カーソル
 	SpriteSP m_center_carsor;
+
+	DebugFontSP m_debug_font;
+
+	//フォント
+	FontSP m_font;
+	std::vector< std::wstring > m_logo;
+	//カメラ
+	ViewCameraSP m_view_camera;
 
 	//選択キューブ管理ナンバー
 	int m_select_cube_state;

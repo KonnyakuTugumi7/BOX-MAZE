@@ -40,4 +40,8 @@ public:
 
 	//テクスチャゲッター
 	LPDIRECT3DTEXTURE9 GetTex(){ return m_directx_tex; }
+
+	//テクスチャセッター
+	//tex: テクスチャ
+	void SetTex( const LPDIRECT3DTEXTURE9 tex ){ m_directx_tex = tex; }
 };

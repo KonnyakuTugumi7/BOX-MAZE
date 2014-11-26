@@ -3,10 +3,13 @@
 #include "DXUT.h"
 #include "../../Library/Graphic/graphic_base.h"
 #include "../../Library/Support/csv.h"
-#include "../../GameEngine/Graphic/board.h"
+//#include "../../GameEngine/Graphic/board.h"
 #include <memory>
 #include <string>
 #include <vector>
+
+class CBoard;
+//typedef std::shared_ptr< CBoard > BoardSP;
 
 class CCube;
 typedef std::shared_ptr< CCube > CubeSP;
@@ -22,7 +25,7 @@ private:
 	D3DXVECTOR3 m_length;
 
 	//板ポリ
-	std::vector< BoardSP > m_board_vec;
+	std::vector< std::shared_ptr< CBoard > > m_board_vec;
 
 	//CSV
 	CsvSP m_csv;
@@ -79,9 +82,9 @@ public:
 	inline void SetCubeState( const int state ){ m_cube_state = state; }
 
 	//板ポリゲッター
-	inline std::vector< BoardSP > GetBoard(){ return m_board_vec; }
+	inline std::vector< std::shared_ptr< CBoard > > GetBoard(){ return m_board_vec; }
 
 	//板ポリセッター(指定された板ポリのテクスチャを設定する)
 	//引数1:テクスチャ , 引数2:どこの板ポリか0～5(順番にTop , Left , Back , Right , Front , Bottom)
-	inline void SetBoardTex( const TextureSP tex , const int num ){ m_board_vec[ num ]->SetTex( tex );}
+	void SetBoardTex( const TextureSP tex , const int num );
 };

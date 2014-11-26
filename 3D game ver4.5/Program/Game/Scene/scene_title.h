@@ -2,7 +2,6 @@
 
 #include "DXUT.h"
 #include "../../Library/Support/csv.h"
-#include "../../Library/Graphic/BillboardString.h"
 #include "../../GameEngine/Scene/scene_base.h"
 #include "../../GameEngine/Graphic/sprite.h"
 #include "../../GameEngine/Graphic/board.h"
@@ -43,9 +42,12 @@ private:
 
 	//タイトル画像
 	SpriteSP m_back;
+	BoardSP m_board;
 
 	//タイトルロゴ
-	std::vector< BillboardStringSP > m_logo;
+	FontSP m_font;
+	std::vector< std::wstring > m_logo;
+	std::vector< std::wstring > m_select_logo;
 
 public:
 	//インスタンス作成

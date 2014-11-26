@@ -1,8 +1,10 @@
 #include "DXUT.h"
 #include "cube.h"
+#include "../../Library/Graphic/graphic_base.h"
 #include "../../Library/Graphic/graphics_manager.h"
 #include "../../GameEngine/Camera/camera_base.h"
 #include "../../GameEngine/Graphic/cube_manager.h"
+#include "../../GameEngine/Graphic/board.h"
 
 //生成
 CubeSP CCube::Create( const D3DXVECTOR3 length , const std::string file_path )
@@ -115,4 +117,10 @@ void CCube::Render( const CameraBaseWP camera )
 
 	//ワールドマトリクス設定(ローカル座標からワールド座標へ)
 	SetWldMtx();
+}
+
+//板ポリセッター(指定された板ポリのテクスチャを設定する)
+void CCube::SetBoardTex( const TextureSP tex , const int num )
+{
+	m_board_vec[ num ]->SetTex( tex );
 }

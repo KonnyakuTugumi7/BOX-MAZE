@@ -1,11 +1,9 @@
 #pragma once
 
+#include "DXUT.h"
 #include <memory>
 
 #pragma warning ( disable : 4238)	//非標準の拡張機能が使用されています : 右辺値のクラスが左辺値に使用されます
-
-class CCameraBase;
-typedef std::weak_ptr< CCameraBase > CameraBaseWP;
 
 //トランスフォームクラス
 class CTransform{
@@ -75,10 +73,6 @@ public:
 	//ワールドマトリックスを設定
 	//引数1:親のワールドマトリックス
 	void SetWldMtx( D3DXMATRIX* parent_mtx = NULL );
-
-	//ワールドマトリックス設定(billboard用) //カメラの方向を向く用
-	//引数1:カメラ , 引数2:親のワールドマトリックス
-	void SetWldMtxBillBoard( const CameraBaseWP camera );
 
 	//引数1:回転量(x) , 引数2:回転量(y) , 引数3:回転量(z)
 	void UpdateRotMtx( const float& rot_x , const float& rot_y , const float& rot_z );

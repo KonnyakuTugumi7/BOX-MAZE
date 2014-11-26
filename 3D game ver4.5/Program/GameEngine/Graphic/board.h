@@ -8,11 +8,8 @@
 
 #pragma warning ( disable : 4244 )
 
-class CGraphicBase;
 class CCube;
-typedef std::weak_ptr< CCube > CubeWP;
-class CCameraBase;
-typedef std::weak_ptr< CCameraBase > CameraBaseWP;
+//typedef std::weak_ptr< CCube > CubeWP;
 
 class CBoard;
 typedef std::shared_ptr< CBoard > BoardSP;
@@ -27,7 +24,7 @@ protected:
 	D3DXVECTOR3 m_board_size;
 
 	//キューブのウィクポ・・・Cube(親)のワールドマトリックスを取得するため
-	CubeWP m_cube;
+	std::weak_ptr< CCube > m_cube;
 
 public:
 	//コンストラクタ
@@ -38,7 +35,7 @@ public:
 	CBoard( const int width , const int height , const std::string path = "" ){ Init( width , height , path ); }
 
 	//デストラクタ
-	~CBoard(){}
+	virtual ~CBoard(){}
 
 	//生成
 	//引数1:ボードの幅 , 引数2:ボードの高さ , 引数3:テクスチャパス , 引数4:レンダリングリストの種類
@@ -52,10 +49,14 @@ public:
 	//引数1:カメラ
 	virtual void Render( const CameraBaseWP camera );
 
+	//ワールドマトリックス設定(billboard用) //カメラの方向を向く用
+	//引数1:カメラ , 引数2:親のワールドマトリックス
+	void SetWldMtxBillBoard( const CameraBaseWP camera );
+
 	//キューブウィークポインタセッター
-	inline void SetCubeWP( const CubeWP cube ){ m_cube = cube; }
+	inline void SetCubeWP( const std::weak_ptr< CCube > cube ){ m_cube = cube; }
 
 	//テクスチャセッター
 	//引数1:テクスチャ(板ポリには今のところ一枚につき一つのテクスチャしか設定していないのでこれでおk)
-	inline void SetTex( const TextureSP tex ){ m_texs.clear();m_texs.push_back( tex ); }
+	void SetTex( const TextureSP tex );
 };

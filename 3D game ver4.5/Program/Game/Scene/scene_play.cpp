@@ -50,8 +50,6 @@ void CScenePlay::SceneInit()
 	//UI初期化
 	m_ui = CUserInterface::Create();
 
-	m_font = CFont::Create( 10 , 10 );
-
 	//マウスカーソルを表示
 	MOUSE->DisplayCursor( false );
 }
@@ -63,7 +61,6 @@ void CScenePlay::SceneDelete()
 	//m_cube_manager->m_csv_platinum->ExportFile();
 
 	//解放
-	m_font.reset();
 	m_cube_manager.reset();
 	m_ui.reset();
 }
@@ -152,10 +149,6 @@ void CScenePlay::SceneFrameRender( const float elapsed_time )
 
 	//描画
 	CGraphicsManager::SysRender( m_camera );
-
-	//std::stringstream ss;
-	//ss << DXUTGetFPS();
-	//m_font->DrawFont( ss.str() , 100 , 100 , m_font->RED );
 }
 
 //サウンド再生

@@ -11,6 +11,8 @@ ShaderBaseSP CGraphicsManager::m_sdr_use = NULL;
 ShaderBaseSP CGraphicsManager::m_sdr_base = NULL;
 ShaderDirectionalLightSP CGraphicsManager::m_sdr_dir_light = NULL;
 std::vector< std::list< GraphicBaseSP > > CGraphicsManager::m_render_list;
+float CGraphicsManager::m_window_width = 800.0f;
+float CGraphicsManager::m_window_height = 600.0f;
 
 //‰Šú‰»
 void CGraphicsManager::Initialize( IDirect3DDevice9* pd3dDevice )

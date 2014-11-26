@@ -10,6 +10,7 @@
 #include "../../Game/Scene/scene_play.h"
 #include "../../Game/Scene/scene_edit.h"
 #include "../../Game/Camera/tp_camera.h"
+#include "../../Game/Camera/view_camera.h"
 
 //初期化
 void CSceneTitle::SceneInit()
@@ -25,13 +26,14 @@ void CSceneTitle::SceneInit()
 	m_csv = CCsv::Create( "Content/csv/TitleData.csv" );
 
 	//カメラ
-	m_camera = CTPCamera::Create();
+	m_camera = CViewCamera::Create();
 
 	//------------------------------画像------------------------------
 
 	//背景
-	m_back = CSprite::Create( "Content/graphics/title.jpg" , CGraphicsManager::BACK_2D );
-	m_back->m_pos = D3DXVECTOR3( m_csv->GetToken< int >( 0 , 0 ) , m_csv->GetToken< int >( 0 , 1 ) , 0 );
+	//m_back = CSprite::Create( "Content/graphics/title.jpg" , CGraphicsManager::BACK_2D );
+	//m_back->m_pos = D3DXVECTOR3( m_csv->GetToken< int >( 0 , 0 ) , m_csv->GetToken< int >( 0 , 1 ) , 0 );
+	m_board = CBoard::Create( CGraphicsManager::m_window_width , CGraphicsManager::m_window_height , "Content/graphics/title.jpg" , CGraphicsManager::BACK_2D );
 
 	//シーンナンバー
 	m_scene_num = SCENE_NUM::PLAY;
@@ -42,15 +44,28 @@ void CSceneTitle::SceneInit()
 	//ステージ選択画面かどうか
 	m_is_stage_select = false;
 
-	//m_logo[ 0 ] = CBillboardString::Create( CGraphicsManager::m_pd3dDevice );
-	//m_logo.push_back( CBillboardString::Create( CGraphicsManager::m_pd3dDevice ) );
-	//m_logo[ 0 ]->SetFont( FACE_NAME::MS_MINCHOU.c_str() );
-	//m_logo[ 0 ]->SetMaxPixelSize( 150 );
-	for( int i = 0 ; i < 4 ; ++i )
+	for( int i = 0 ; i < m_csv->GetNumLine() ; ++i )
 	{
-		m_logo.push_back( CBillboardString::Create( CGraphicsManager::m_pd3dDevice ) );
-		m_logo[ i ]->SetFont( FACE_NAME::MS_MINCHOU.c_str() );
-		m_logo[ i ]->SetMaxPixelSize( ( i == 0 ) ? 150 : 64 );
+		WCHAR wc_buff[ 255 ] = { 0 };
+		CCommon::DXconvAnsiToWide( wc_buff , m_csv->GetToken< std::string >( i , 0 ).c_str() , 255 );
+		m_logo.push_back( wc_buff );
+	}
+	m_csv = CCsv::Create( "Content/csv/TitleSelectData.csv" );
+	for( int i = 0 ; i < m_csv->GetNumLine() ; ++i )
+	{
+		WCHAR wc_buff[ 255 ] = { 0 };
+		CCommon::DXconvAnsiToWide( wc_buff , m_csv->GetToken< std::string >( i , 0 ).c_str() , 255 );
+		m_select_logo.push_back( wc_buff );
+	}
+
+	//フォントを生成
+	m_font = CFont::Create();
+	if (m_font)
+	{
+		m_font->SetSize( 80.0f , 50.0f );
+		m_font->SetAlign( CFont::CENTER );
+		for( int i = 0 ; i < m_logo.size() ; ++i ) m_font->CreateTexture( 128 , 512 , ( i == 0 ) ? FontType::MS_GOTHIC : FontType::MS_MINCHOU , m_logo[ i ] );
+		for( int i = 0 ; i < m_select_logo.size() ; ++i ) m_font->CreateTexture( 128 , 512 , ( i == 0 ) ? FontType::MS_GOTHIC : FontType::MS_MINCHOU , m_select_logo[ i ] );
 	}
 }
 
@@ -59,7 +74,8 @@ void CSceneTitle::SceneDelete()
 {
 	//解放
 	m_back.reset();
-	for( int i = 0 ; i < m_logo.size() ; ++i ) m_logo[ i ].reset();
+	m_board.reset();
+	m_font.reset();
 }
 
 //ロジック処理
@@ -82,27 +98,10 @@ void CSceneTitle::SceneFrameMove( const float elapsed_time )
 	if( m_is_stage_select == false )
 	{
 		TitleInput();
-		m_logo[ 0 ]->RegistString( _T( "BOX MAZE" ) );
-		m_logo[ 1 ]->RegistString( _T( "START" ) );
-		m_logo[ 2 ]->RegistString( _T( "EDIT" ) );
-		m_logo[ 3 ]->RegistString( _T( "EXIT" ) );
-		m_logo[ 0 ]->SetColor( 0xFFFF0000 );
-		m_logo[ 0 ]->SetPosition( 100 , 50 );
 	}
 	else
 	{
 		StageSelectInput();
-		m_logo[ 0 ]->RegistString( _T( "BOX MAZE" ) );
-		m_logo[ 1 ]->RegistString( _T( "STAGE01" ) );
-		m_logo[ 2 ]->RegistString( _T( "STAGE02" ) );
-		m_logo[ 3 ]->RegistString( _T( "TITLE" ) );
-		m_logo[ 0 ]->SetColor( 0xFFFF0000 );
-		m_logo[ 0 ]->SetPosition( 100 , 50 );
-	}
-	for( int i = 1 ; i < m_logo.size() ; ++i )
-	{
-		m_logo[ i ]->SetPosition( 280 , ( i + 1 ) * 100 + 50 );
-		m_logo[ i ]->SetColor( m_scene_num == ( i - 1 ) ? 0xFFFFF000 : 0xFFFF0000 );
 	}
 }
 
@@ -111,16 +110,33 @@ void CSceneTitle::SceneFrameRender( const float elapsed_time )
 {
 	HRESULT hr;
 
-	// 画面のクリア																	  //画面の色
+	//画面のクリア																	  //画面の色
 	V( CGraphicsManager::m_pd3dDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB( 0, 0, 0, 0 ), 1.0f, 0 ) );
 
 	//描画
 	CGraphicsManager::SysRender( m_camera );
 
-	//ロゴ描画
-	CGraphicsManager::m_pd3dDevice->BeginScene();
-	for( int i = 0 ; i < m_logo.size() ; ++i ) m_logo[ i ]->Draw();
-	CGraphicsManager::m_pd3dDevice->EndScene();
+	D3DXVECTOR4 color(Color::WHITE, 1.0f);
+
+	//メニュー画面ごとの処理
+	if( m_is_stage_select == false )
+	{
+		for( int i = 0 ; i < m_logo.size() ; ++i )
+		{
+			( m_scene_num == i - 1 ) ? color = D3DXVECTOR4( Color::YELLOW , 1.0f ) : color = D3DXVECTOR4( Color::RED , 1.0f );
+			( i == 0 ) ? m_font->SetSize( 100.0f , 70.0f ) : m_font->SetSize( 80.0f , 50.0f );
+			m_font->Draw( m_camera , m_logo[ i ] , D3DXVECTOR2( 400 , ( i * 120 ) + 100 ) , color );
+		}
+	}
+	else
+	{
+		for( int i = 0 ; i < m_select_logo.size() ; ++i )
+		{
+			( m_scene_num == i - 1 ) ? color = D3DXVECTOR4( Color::YELLOW , 1.0f ) : color = D3DXVECTOR4( Color::RED , 1.0f );
+			( i == 0 ) ? m_font->SetSize( 100.0f , 70.0f ) : m_font->SetSize( 80.0f , 50.0f );
+			m_font->Draw( m_camera , m_select_logo[ i ] , D3DXVECTOR2( 400 , ( i * 120 ) + 100 ) , color );
+		}
+	}
 }
 
 //サウンド再生
