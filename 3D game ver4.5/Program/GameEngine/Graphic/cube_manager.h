@@ -7,6 +7,7 @@
 #include <vector>
 
 #pragma warning( disable:4482 ) //非標準の拡張機能が使用されています: enum 'CCubeManager::CUBE_STATE' が限定名で使用されます
+#pragma warning( disable:4244 ) //'int' から 'FLOAT' への変換です。データが失われる可能性があります。
 
 class CCubeManager;
 typedef std::shared_ptr< CCubeManager > CubeManagerSP;

@@ -26,7 +26,7 @@ CTPCamera::CTPCamera()
 	Perspective( m_csv->GetToken< float >( 0 , 0 ) , 1.0f , m_csv->GetToken< float >( 1 , 0 ) , m_csv->GetToken< float >( 2 , 0 ) );
 
 	//’‹“_‚©‚çˆÚ“®
-	LookAt( D3DXVECTOR3( 0.0f , m_csv->GetToken< float >( 3 , 0 ) , m_csv->GetToken< float >( 3 , 1 ) ) , D3DXVECTOR3( 0.0f , m_csv->GetToken< float >( 4 , 0 ) , 0 ) , D3DXVECTOR3( 0.0f , 1.0f , 0.0f ) );
+	LookAt( D3DXVECTOR3( 0.0f , /*m_csv->GetToken< float >( 3 , 0 )*/0 , m_csv->GetToken< float >( 3 , 1 ) ) , D3DXVECTOR3( 0.0f , /*m_csv->GetToken< float >( 4 , 0 )*/0 , 0 ) , D3DXVECTOR3( 0.0f , 1.0f , 0.0f ) );
 }
 
 //’‹“_

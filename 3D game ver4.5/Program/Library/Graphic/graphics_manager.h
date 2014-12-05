@@ -39,6 +39,12 @@ public:
 		STATE_NUM
 	};
 
+	//ウィンドウ幅
+	static float m_window_width;
+
+	//ウィンドウ高さ
+	static float m_window_height;
+
 private:
 	//コンストラクタ
 	CGraphicsManager(){};

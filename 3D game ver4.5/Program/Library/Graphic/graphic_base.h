@@ -4,6 +4,7 @@
 #include "../../Library/Graphic/material.h"
 #include "../../Library/Graphic/mesh.h"
 #include "../../Library/Graphic/texture.h"
+#include "../../GameEngine/Camera/camera_base.h"
 #include <string>
 #include <sstream>
 #include <vector>
@@ -57,6 +58,7 @@ public:
 	//コンストラクタ
 	CGraphicBase() : m_is_render( true ) ,
 					 m_is_collision( true ) , 
+					 m_camera_distance( 1.0f ) ,
 					 m_cull_state( D3DCULL_CCW ) , 
 					 m_sdr_state( SDR_DIR_LIGHT ) ,
 					 m_mesh( NULL )

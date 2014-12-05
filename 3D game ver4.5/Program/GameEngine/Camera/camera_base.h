@@ -125,18 +125,18 @@ public:
 
 	//‰“‹ß“Š‰e
 	//ˆø”1:‰æŠp(x) , ˆø”2:ƒAƒXƒyƒNƒg”ä , ˆø”3:‹ßÚŒÀŠE(Z) , ˆø”4:‰“ŠuŒÀŠE(Z)
-	virtual void Perspective( const float fovx , const float aspect , const float znear , const float zfar ) = 0;
+	virtual void Perspective( const float fovx , const float aspect , const float znear , const float zfar ){};
 
 	//‰ñ“]
 	//ˆø”1:y²‚Å‰ñ“]‚·‚é•ûŒü , ˆø”2:x²‚Å‰ñ“]‚·‚é•ûŒü , ˆø”3:z²‚Å‰ñ“]‚·‚é•ûŒü
-	virtual void Rotate( float headingDegrees , float pitchDegrees , float rollDegrees ) = 0;
+	virtual void Rotate( float headingDegrees , float pitchDegrees , float rollDegrees ){};
     
 	//ƒJƒƒ‰XV
 	//ˆø”1:Œo‰ßŠÔ
-	virtual void UpdateCamera( const float elapsedTimeSec ) = 0;
+	virtual void UpdateCamera( const float elapsedTimeSec ){};
 
 	//ƒJƒƒ‰‰Šú‰»
-	virtual void Init() = 0;
+	virtual void Init(){};
 
     //----------------------------------ƒQƒbƒ^[----------------------------------
 

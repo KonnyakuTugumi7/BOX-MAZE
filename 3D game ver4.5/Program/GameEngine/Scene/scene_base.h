@@ -16,9 +16,6 @@ protected:
 	//CSV
 	CsvSP m_csv;
 
-	//フォント
-	FontSP m_font;
-
 	//カメラインスタンス
 	CameraBaseSP m_camera;
 

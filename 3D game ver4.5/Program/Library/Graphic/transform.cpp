@@ -1,6 +1,5 @@
 #include "DXUT.h"
 #include "transform.h"
-#include "../../Game/Camera/fp_camera.h"
 
 //コンストラクタ
 CTransform::CTransform() : 
@@ -64,34 +63,6 @@ void CTransform::SetWldMtx( D3DXMATRIX* parent_mtx )
 	{
 		m_wld_mtx =  SclMtx * RotMtx * PosMtx;
 	}
-}
-
-//ワールドマトリックス設定(billboard用) //カメラの方向を向く用
-void CTransform::SetWldMtxBillBoard( const CameraBaseWP camera )
-{
-	//-----------------------------ワールドマトリクス設定(ローカル座標からワールド座標へ)-------------------------------------
-
-	D3DXMATRIX SclMtx , RotMtx , PosMtx;
-
-	//---------------------------拡大---------------------------
-	D3DXMatrixScaling( &SclMtx , m_scl.x , m_scl.y , m_scl.z );
-
-	//--------------------------平行移動--------------------------
-	D3DXMatrixTranslation( &PosMtx, m_pos.x, m_pos.y, m_pos.z );
-
-	//ビュー行列を作成
-	D3DXMatrixLookAtLH( &RotMtx , &camera.lock()->GetPosition() , &m_pos , &D3DXVECTOR3( 0 , 1 , 0 ) );
-
-	//平行移動行列を無効(0)に
-	RotMtx._41 = 0;
-	RotMtx._42 = 0;
-	RotMtx._43 = 0;
-
-	//逆行列作成
-	D3DXMatrixInverse( &RotMtx , NULL , &RotMtx );
-
-	//ワールドマトリックス
-	m_wld_mtx =  SclMtx * RotMtx * PosMtx;
 }
 
 //回転行列更新
