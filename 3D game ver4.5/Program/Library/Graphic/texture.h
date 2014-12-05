@@ -31,7 +31,7 @@ public:
 	//引数1:ファイルパス
 	static TextureSP Create( const std::string& path );
 
-	//空のテクスチャ作成(多重ロードの可能性アリなので要修正)
+	//空のテクスチャ作成
 	//引数1:幅 , 引数2:高さ
 	static TextureSP CreateEmptyTex( const DWORD w , const DWORD h );
 
@@ -43,5 +43,11 @@ public:
 
 	//テクスチャセッター
 	//tex: テクスチャ
-	void SetTex( const LPDIRECT3DTEXTURE9 tex ){ m_directx_tex = tex; }
+	void SetTex( const LPDIRECT3DTEXTURE9 tex )
+	{
+		//テクスチャの参照カウンタを増やし、古いテクスチャを開放してから新しいテクスチャを設定
+		if( tex ) tex->AddRef();
+		if( m_directx_tex ) m_directx_tex->Release();
+		m_directx_tex = tex;
+	}
 };

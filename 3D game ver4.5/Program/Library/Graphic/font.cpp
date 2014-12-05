@@ -47,10 +47,6 @@ void CFont::Draw( const CameraBaseWP camera , const std::wstring& string , const
 			drawPt.x = pos.x + ( i * m_scale.x ) - ( m_scale.x * 0.5f * ( string.size() - 1 ) ) - offsetPt.x;
 			break;
 		}
-
-		//m_board->m_pos = drawPt;
-		//m_board->m_scl = m_scale;
-		//m_board->SetTex( m_data[ string.at( i ) ] );
 		m_pos = drawPt;
 		m_scl = m_scale;
 		m_col = color;

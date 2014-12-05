@@ -1,11 +1,12 @@
-﻿2014/11/27 6:00:46 にビルドを開始しました。
+﻿2014/12/06 7:18:31 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\EmptyProject_2010.vcxproj" (build ターゲット)。
      1>InitializeBuildStatus:
          "AlwaysCreate" が指定されたため "Release\EmptyProject.unsuccessfulbuild" を作成しています。
        ClCompile:
          すべての出力が最新のものです。
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IDXUT\Core /IDXUT\Optional /Zi /nologo /W4 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D D3DXFX_LARGEADDRESS_HANDLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /openmp- /Yu"DXUT.h" /Fp"Release\EmptyProject.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Program\Game\Scene\scene_title.cpp  
-         scene_title.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IDXUT\Core /IDXUT\Optional /Zi /nologo /W4 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D D3DXFX_LARGEADDRESS_HANDLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /openmp- /Yu"DXUT.h" /Fp"Release\EmptyProject.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Program\GameEngine\Graphic\board.cpp Program\Library\Graphic\font.cpp  
+         board.cpp
+         font.cpp
        ResourceCompile:
          すべての出力が最新のものです。
        Link:
@@ -66,4 +67,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:10.63
+経過時間 00:00:14.20

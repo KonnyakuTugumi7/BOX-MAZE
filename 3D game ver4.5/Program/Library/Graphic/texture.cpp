@@ -32,14 +32,31 @@ TextureSP CTexture::Create( const std::string& _path )
 	return it->second;
 }
 
-//空のテクスチャ作成(多重ロードの可能性アリなので要修正)
-
+//空のテクスチャ作成
 TextureSP CTexture::CreateEmptyTex( const DWORD w , const DWORD h )
 {
-	//テクスチャ
-	TextureSP texSP = std::make_shared< CTexture >();
-	D3DXCreateTexture( CGraphicsManager::m_pd3dDevice , w , h , 0 , 0 , D3DFMT_A8R8G8B8 , D3DPOOL_MANAGED , &texSP->m_directx_tex ); 
-	return texSP;
+	//名前
+	std::stringstream ss;
+	ss << w << h;
+
+	//管理マップから既にメモリ上に存在しないか重複チェック
+	std::map< std::string , TextureSP >::iterator it = m_textures.find( ss.str() );
+
+	//存在しなければ新しくロード
+	if( it == m_textures.end() )
+	{
+		//テクスチャ
+		TextureSP texSP = std::make_shared< CTexture >();
+		D3DXCreateTexture( CGraphicsManager::m_pd3dDevice , w , h , 0 , 0 , D3DFMT_A8R8G8B8 , D3DPOOL_MANAGED , &texSP->m_directx_tex ); 
+		texSP->m_name = ss.str();
+		//管理マップに登録
+		m_textures.insert( std::make_pair( ss.str() , texSP ) );
+
+		return texSP;
+	}
+
+	//既に存在するならそのテクスチャを返す
+	return it->second;
 }
 
 //テクスチャの解放
@@ -52,7 +69,7 @@ void CTexture::Destroy( const std::string _name )
 	{
 		while( it != m_textures.end() )
 		{
-			( *it ).second->m_directx_tex->Release();
+			SAFE_RELEASE( ( *it ).second->m_directx_tex );
 			( *it ).second.reset();
 			++it;
 		}

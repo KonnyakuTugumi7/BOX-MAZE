@@ -18,11 +18,6 @@ class CFont : public CBoard{
 private:
 	//テクスチャのデータマップ
 	std::hash_map<wchar_t, LPDIRECT3DTEXTURE9> m_data;
-	//TextureSP m_tex;
-	//std::hash_map<wchar_t, TextureSP> m_data;
-
-	//テクスチャを貼り付ける板ポリ
-	//std::shared_ptr<CBoard> m_board;
 
 	//整列順
 	enum Align;
@@ -45,8 +40,6 @@ public:
 	{
 		Init( 1 , 1 );
 		m_texs.push_back( CTexture::CreateEmptyTex( 1.0f , 1.0f ) );
-		//板ポリ生成
-		//m_board = std::make_shared< CBoard >( 1 , 1 );
 	}
 
 	//デストラクタ
