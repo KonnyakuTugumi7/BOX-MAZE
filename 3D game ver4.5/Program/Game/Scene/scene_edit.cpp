@@ -119,7 +119,7 @@ void CSceneEdit::SceneFrameRender( const float elapsed_time )
 {
 	HRESULT hr;
 
-	// 画面のクリア																	  //画面の色
+	//画面のクリア																	  //画面の色
 	V( CGraphicsManager::m_pd3dDevice->Clear( 0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB( 255 , 0 , 0 , 0/*255, 0, 0, 255*/ ), 1.0f, 0 ) );
 
 	//for( int i = 0 ; i < m_logo.size() ; ++i ) if( i == m_select_cube_state ) m_font->Draw( m_view_camera , m_logo[ i ] , D3DXVECTOR2( 50.0f , 20.0f ) , D3DXVECTOR4( Color::RED , 1.0f ) );

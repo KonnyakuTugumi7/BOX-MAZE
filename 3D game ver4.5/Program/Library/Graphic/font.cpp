@@ -21,6 +21,10 @@ CFont::~CFont()
 //描画
 void CFont::Draw( const CameraBaseWP camera , const std::wstring& string , const D3DXVECTOR2& pos , const D3DXVECTOR4& color)
 {
+	HRESULT hr;
+	//zバッファのみクリア
+	V( CGraphicsManager::m_pd3dDevice->Clear( 0, NULL, D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB( 255 , 0 , 0 , 0/*255, 0, 0, 255*/ ), 1.0f, 0 ) );
+
 	//左上を(0,0)にする為のオフセットを定義
 	D3DXVECTOR2 offsetPt( CGraphicsManager::m_window_width * 0.5f , CGraphicsManager::m_window_height * 0.5f);
 

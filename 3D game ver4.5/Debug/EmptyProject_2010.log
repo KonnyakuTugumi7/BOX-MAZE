@@ -1,15 +1,79 @@
-﻿2014/12/06 14:58:46 にビルドを開始しました。
-     1>ノード 2 上のプロジェクト "C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\EmptyProject_2010.vcxproj" (build ターゲット)。
-     1>InitializeBuildStatus:
+﻿2014/12/06 15:58:30 にビルドを開始しました。
+     1>ノード 2 上のプロジェクト "C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\EmptyProject_2010.vcxproj" (rebuild ターゲット)。
+     1>_PrepareForClean:
+         ファイル "Debug\EmptyProject.lastbuildstate" を削除しています。
+       InitializeBuildStatus:
          "AlwaysCreate" が指定されたため "Debug\EmptyProject.unsuccessfulbuild" を作成しています。
        ClCompile:
-         すべての出力が最新のものです。
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IDXUT\Core /IDXUT\Optional /I"C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include" /ZI /nologo /W4 /WX- /Od /Oi /Oy- /D WIN32 /D _DEBUG /D DEBUG /D PROFILE /D _WINDOWS /D D3DXFX_LARGEADDRESS_HANDLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /openmp- /Yu"DXUT.h" /Fp"Debug\EmptyProject.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Program\Game\Scene\scene_edit.cpp  
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IDXUT\Core /IDXUT\Optional /I"C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include" /ZI /nologo /W4 /WX- /Od /Oi /Oy- /D WIN32 /D _DEBUG /D DEBUG /D PROFILE /D _WINDOWS /D D3DXFX_LARGEADDRESS_HANDLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /openmp- /Yc"DXUT.h" /Fp"Debug\EmptyProject.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt DXUT\Core\DXUT.cpp  
+         DXUT.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IDXUT\Core /IDXUT\Optional /I"C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include" /ZI /nologo /W4 /WX- /Od /Oi /Oy- /D WIN32 /D _DEBUG /D DEBUG /D PROFILE /D _WINDOWS /D D3DXFX_LARGEADDRESS_HANDLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /openmp- /Yu"DXUT.h" /Fp"Debug\EmptyProject.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt DXUT\Optional\SDKsound.cpp DXUT\Optional\SDKwavefile.cpp Program\GameEngine\Camera\camera_base.cpp Program\GameEngine\Collision\collision_manager.cpp Program\GameEngine\Graphic\board.cpp Program\GameEngine\Graphic\cube.cpp Program\GameEngine\Graphic\cube_manager.cpp Program\GameEngine\Graphic\sprite.cpp Program\GameEngine\Graphic\xfile.cpp Program\GameEngine\Scene\scene_manager.cpp Program\Game\Camera\fp_camera.cpp Program\Game\Camera\tp_camera.cpp Program\Game\Camera\view_camera.cpp Program\Game\Object\user_interface.cpp Program\Game\Scene\scene_edit.cpp Program\Game\Scene\scene_fade.cpp Program\Game\Scene\scene_play.cpp Program\Game\Scene\scene_title.cpp Program\Library\Graphic\animation.cpp Program\Library\Graphic\font.cpp Program\Library\Graphic\graphics_manager.cpp Program\Library\Graphic\graphic_base.cpp Program\Library\Graphic\mesh.cpp Program\Library\Graphic\shader_base.cpp Program\Library\Graphic\shader_depth_buffer_shadow.cpp Program\Library\Graphic\shader_directional_light.cpp Program\Library\Graphic\shader_lambert.cpp Program\Library\Graphic\texture.cpp Program\Library\Graphic\transform.cpp Program\Library\Input\input.cpp Program\Library\Sound\sound.cpp Program\Library\Sound\sound_manager.cpp Program\Library\Support\common.cpp Program\Library\Support\csv.cpp program\Main.cpp DXUT\Core\DXUTenum.cpp DXUT\Core\DXUTmisc.cpp DXUT\Optional\DXUTcamera.cpp DXUT\Optional\DXUTgui.cpp DXUT\Optional\DXUTres.cpp DXUT\Optional\DXUTsettingsdlg.cpp DXUT\Optional\SDKmesh.cpp DXUT\Optional\SDKmisc.cpp  
+         SDKsound.cpp
+         SDKwavefile.cpp
+         camera_base.cpp
+         collision_manager.cpp
+         board.cpp
+         cube.cpp
+         cube_manager.cpp
+         sprite.cpp
+         xfile.cpp
+         scene_manager.cpp
+         fp_camera.cpp
+         tp_camera.cpp
+         view_camera.cpp
+         user_interface.cpp
          scene_edit.cpp
+         scene_fade.cpp
+         scene_play.cpp
+         scene_title.cpp
+         animation.cpp
+         font.cpp
+         コードを生成中...
+         コンパイル中...
+         graphics_manager.cpp
+         graphic_base.cpp
+         mesh.cpp
+         shader_base.cpp
+         shader_depth_buffer_shadow.cpp
+         shader_directional_light.cpp
+         shader_lambert.cpp
+         texture.cpp
+         transform.cpp
+         input.cpp
+         sound.cpp
+     1>c:\program files (x86)\microsoft visual studio 10.0\vc\include\cstdio(48): warning C4995: 'gets': 名前が避けられた #pragma として記述されています。
+     1>c:\program files (x86)\microsoft visual studio 10.0\vc\include\cstdio(52): warning C4995: 'sprintf': 名前が避けられた #pragma として記述されています。
+     1>c:\program files (x86)\microsoft visual studio 10.0\vc\include\cstdio(55): warning C4995: 'vsprintf': 名前が避けられた #pragma として記述されています。
+     1>c:\program files (x86)\microsoft visual studio 10.0\vc\include\cstring(21): warning C4995: 'strcat': 名前が避けられた #pragma として記述されています。
+     1>c:\program files (x86)\microsoft visual studio 10.0\vc\include\cstring(22): warning C4995: 'strcpy': 名前が避けられた #pragma として記述されています。
+     1>c:\program files (x86)\microsoft visual studio 10.0\vc\include\cwchar(30): warning C4995: 'swprintf': 名前が避けられた #pragma として記述されています。
+     1>c:\program files (x86)\microsoft visual studio 10.0\vc\include\cwchar(31): warning C4995: 'vswprintf': 名前が避けられた #pragma として記述されています。
+     1>c:\program files (x86)\microsoft visual studio 10.0\vc\include\cwchar(33): warning C4995: 'wcscat': 名前が避けられた #pragma として記述されています。
+     1>c:\program files (x86)\microsoft visual studio 10.0\vc\include\cwchar(35): warning C4995: 'wcscpy': 名前が避けられた #pragma として記述されています。
+     1>c:\program files (x86)\microsoft visual studio 10.0\vc\include\string(757): warning C4995: 'swprintf': 名前が避けられた #pragma として記述されています。
+     1>c:\program files (x86)\microsoft visual studio 10.0\vc\include\string(766): warning C4995: 'swprintf': 名前が避けられた #pragma として記述されています。
+     1>c:\program files (x86)\microsoft visual studio 10.0\vc\include\string(775): warning C4995: 'swprintf': 名前が避けられた #pragma として記述されています。
+     1>c:\program files (x86)\microsoft visual studio 10.0\vc\include\intrin.h(1092): warning C4995: 'wcscat': 名前が避けられた #pragma として記述されています。
+     1>c:\program files (x86)\microsoft visual studio 10.0\vc\include\intrin.h(1094): warning C4995: 'wcscpy': 名前が避けられた #pragma として記述されています。
+         sound_manager.cpp
+         common.cpp
+         csv.cpp
+         Main.cpp
+         DXUTenum.cpp
+         DXUTmisc.cpp
+         DXUTcamera.cpp
+         DXUTgui.cpp
+         DXUTres.cpp
+         コードを生成中...
+         コンパイル中...
+         DXUTsettingsdlg.cpp
+         SDKmesh.cpp
+         SDKmisc.cpp
+         コードを生成中...
        ResourceCompile:
-         すべての出力が最新のものです。
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D _UNICODE /D UNICODE /l"0x0409" /nologo /fo"Debug\EmptyProject.res" EmptyProject.rc 
        ManifestResourceCompile:
-         すべての出力が最新のものです。
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\EmptyProject.exe.embed.manifest.res" Debug\EmptyProject_manifest.rc 
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\Debug\EmptyProject.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86" /LIBPATH:"C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x64" d3dx10d.lib d3dx9d.lib dxerr.lib dxguid.lib winmm.lib comctl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\EmptyProject.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\Debug\EmptyProject.pdb" /SUBSYSTEM:WINDOWS /LARGEADDRESSAWARE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\Debug\EmptyProject.lib" /MACHINE:X86 Debug\EmptyProject.res
          Debug\EmptyProject.exe.embed.manifest.res
@@ -58,16 +122,62 @@
          Debug\SDKmesh.obj
          Debug\SDKmisc.obj  
        Manifest:
+         ファイル "Debug\EmptyProject.exe.embed.manifest" を削除しています。
          C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\EmptyProject.exe.embed.manifest" /manifest Debug\EmptyProject.exe.intermediate.manifest "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\Include\Manifest\dpiaware.manifest"
-         すべての出力が最新のものです。
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\EmptyProject.exe.embed.manifest.res" Debug\EmptyProject_manifest.rc 
        LinkEmbedManifest:
-         すべての出力が最新のものです。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\Debug\EmptyProject.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86" /LIBPATH:"C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x64" d3dx10d.lib d3dx9d.lib dxerr.lib dxguid.lib winmm.lib comctl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\EmptyProject.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\Debug\EmptyProject.pdb" /SUBSYSTEM:WINDOWS /LARGEADDRESSAWARE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\Debug\EmptyProject.lib" /MACHINE:X86 Debug\EmptyProject.res
+         Debug\EmptyProject.exe.embed.manifest.res
+         Debug\SDKsound.obj
+         Debug\SDKwavefile.obj
+         Debug\camera_base.obj
+         Debug\collision_manager.obj
+         Debug\board.obj
+         Debug\cube.obj
+         Debug\cube_manager.obj
+         Debug\sprite.obj
+         Debug\xfile.obj
+         Debug\scene_manager.obj
+         Debug\fp_camera.obj
+         Debug\tp_camera.obj
+         Debug\view_camera.obj
+         Debug\user_interface.obj
+         Debug\scene_edit.obj
+         Debug\scene_fade.obj
+         Debug\scene_play.obj
+         Debug\scene_title.obj
+         Debug\animation.obj
+         Debug\font.obj
+         Debug\graphics_manager.obj
+         Debug\graphic_base.obj
+         Debug\mesh.obj
+         Debug\shader_base.obj
+         Debug\shader_depth_buffer_shadow.obj
+         Debug\shader_directional_light.obj
+         Debug\shader_lambert.obj
+         Debug\texture.obj
+         Debug\transform.obj
+         Debug\input.obj
+         Debug\sound.obj
+         Debug\sound_manager.obj
+         Debug\common.obj
+         Debug\csv.obj
+         Debug\Main.obj
+         Debug\DXUT.obj
+         Debug\DXUTenum.obj
+         Debug\DXUTmisc.obj
+         Debug\DXUTcamera.obj
+         Debug\DXUTgui.obj
+         Debug\DXUTres.obj
+         Debug\DXUTsettingsdlg.obj
+         Debug\SDKmesh.obj
+         Debug\SDKmisc.obj  
          EmptyProject_2010.vcxproj -> C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\Debug\EmptyProject.exe
        FinalizeBuildStatus:
          ファイル "Debug\EmptyProject.unsuccessfulbuild" を削除しています。
          "Debug\EmptyProject.lastbuildstate" のタッチ タスクを実行しています。
-     1>プロジェクト "C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\EmptyProject_2010.vcxproj" (build ターゲット) のビルドが完了しました。
+     1>プロジェクト "C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\EmptyProject_2010.vcxproj" (rebuild ターゲット) のビルドが完了しました。
 
 ビルドに成功しました。
 
-経過時間 00:00:02.72
+経過時間 00:00:30.85
