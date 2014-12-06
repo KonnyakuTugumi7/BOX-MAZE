@@ -26,7 +26,6 @@ void CSceneEdit::SceneInit()
 	m_center_carsor->m_pos = D3DXVECTOR3( 400 , 300 , 0 );
 
 	//カメラ
-	//m_camera = CTPCamera::Create();
 	m_camera = CFPCamera::Create();
 	m_camera->SetIsGravity( false );
 	m_view_camera = CViewCamera::Create();
@@ -128,26 +127,28 @@ void CSceneEdit::SceneFrameRender( const float elapsed_time )
 	//描画
 	CGraphicsManager::SysRender( m_camera );
 
-	std::stringstream ss;
+	for( int i = 0 ; i < m_logo.size() ; ++i ) if( i == m_select_cube_state ) m_font->Draw( m_view_camera , m_logo[ i ] , D3DXVECTOR2( 50.0f , 20.0f ) , D3DXVECTOR4( Color::RED , 1.0f ) );
 
-	if( m_select_cube_state == CCubeManager::NON )
-	{
-		ss << "NON CUBE";
-	}
-	else if( m_select_cube_state == CCubeManager::START )
-	{
-		ss << "START CUBE";
-	}
-	else if( m_select_cube_state == CCubeManager::GOAL )
-	{
-		ss << "GOAL CUBE";
-	}
-	else if( m_select_cube_state == CCubeManager::NORMAL )
-	{
-		ss << "NORMAL CUBE";
-	}
-
-	m_debug_font->DrawFont( ss.str() , 20 , 20 , m_debug_font->RED );
+	//std::stringstream ss;
+	//
+	//if( m_select_cube_state == CCubeManager::NON )
+	//{
+	//	ss << "NON CUBE";
+	//}
+	//else if( m_select_cube_state == CCubeManager::START )
+	//{
+	//	ss << "START CUBE";
+	//}
+	//else if( m_select_cube_state == CCubeManager::GOAL )
+	//{
+	//	ss << "GOAL CUBE";
+	//}
+	//else if( m_select_cube_state == CCubeManager::NORMAL )
+	//{
+	//	ss << "NORMAL CUBE";
+	//}
+	//
+	//m_debug_font->DrawFont( ss.str() , 20 , 20 , m_debug_font->RED );
 }
 
 //サウンド再生
@@ -186,11 +187,11 @@ void CSceneEdit::SceneCollision()
 		{
 			for( int z = 0 ; z < m_cube_manager->m_cubes[ x ][ y ].size() ; ++z )
 			{
+				
 				//マウスポインタの位置からレイを飛ばす
 				D3DXVECTOR3 ray_pos , ray_dir;
 				CCollisionManager::ScreenToRay( ray_pos , ray_dir , 400/*MOUSE->GetPos().x*/ , 300/*MOUSE->GetPos().y*/ , m_camera->GetViewMatrix() , m_camera->GetProjectionMatrix() );
 
-				//レイとキューブが当たっていてかつ左クリックされていたら消す
 				float t = 0.0f;
 				D3DXVECTOR3 temp( 0 , 0 , 0 );
 				if( true == CCollisionManager::CollisionRayAABB( ray_pos , ray_dir , m_cube_manager->m_cubes[ x ][ y ][ z ]->m_pos , m_cube_manager->m_cubes[ x ][ y ][ z ]->GetSize() , m_cube_manager->m_cubes[ x ][ y ][ z ]->GetWldMtx() , t , temp ) )
@@ -211,7 +212,7 @@ void CSceneEdit::SceneCollision()
 			}
 		}
 	}
-
+	
 	if( ( hit_cube_map.size() == 0 && m_select_cube_state == CCubeManager::CUBE_STATE::NON ) ) 
 	{
 		//何にも当たっていないならセレクトキューブのレンダーフラグをオフにして以下の処理を行わない
@@ -234,10 +235,9 @@ void CSceneEdit::SceneCollision()
 		//セレクトキューブのレンダーフラグをオンに
 		m_select_cube->SetIsRender( true );
 	}
-
+	
 	auto it = hit_cube_map.begin();
 	auto it_non = hit_non_cube_map.begin();
-	auto it_pos = hit_cube_pos_map.find( ( *it ).first );
 	//編集するキューブの種類がNONキューブの時(既に描画されているキューブを消す処理)
 	if( m_select_cube_state == CCubeManager::CUBE_STATE::NON )
 	{
@@ -255,11 +255,16 @@ void CSceneEdit::SceneCollision()
 	//それ以外のキューブの時(キューブを設置する処理)
 	else
 	{
-		while( it_non != hit_non_cube_map.end() )
+		if( it != hit_cube_map.end() )
 		{
-			//if( true == CCollisionManager::CollisionPointAABB( ( *it_non ).second.lock()->m_pos , ( *it_non ).second.lock()->GetSize() , ( *it_pos ).second ) ) break;
-			if( CCollisionManager::HIT_DIRECTION::NONE != CCollisionManager::CollisionAABBAABB( ( *it_non ).second.lock()->m_pos , ( *it_non ).second.lock()->m_prev_pos , ( *it_non ).second.lock()->GetSize() , ( *it_pos ).second , ( *it_pos ).second , D3DXVECTOR3( 0.1f , 0.1f , 0.1f ) ) ) break;
-			else ++it_non;
+			auto it_pos = hit_cube_pos_map.find( ( *it ).first );
+			while( it_non != hit_non_cube_map.end() )
+			{
+				if( true == CCollisionManager::CollisionPointAABB( ( *it_non ).second.lock()->m_pos , ( *it_non ).second.lock()->GetSize() , ( *it_pos ).second ) ) break;
+				if( CCollisionManager::HIT_DIRECTION::NONE != CCollisionManager::CollisionAABBAABB( ( *it_non ).second.lock()->m_pos , ( *it_non ).second.lock()->m_prev_pos , ( *it_non ).second.lock()->GetSize() , ( *it_pos ).second , ( *it_pos ).second , D3DXVECTOR3( 0.1f , 0.1f , 0.1f ) ) ) break;
+
+				++it_non;
+			}
 		}
 
 		if( it_non != hit_non_cube_map.end() && ( *it_non ).second.expired() == false )
@@ -305,24 +310,26 @@ void CSceneEdit::SceneCollision()
 			( *it_non ).second.lock()->SetIsRender( true );
 		}
 	}
-
-	//解放
-	it = hit_cube_map.begin();
-	while( it != hit_cube_map.end() )
+	
 	{
-		( *it ).second.reset();
-		++it;
+		//解放
+		auto it = hit_cube_map.begin();
+		while( it != hit_cube_map.end() )
+		{
+			( *it ).second.reset();
+			++it;
+		}
+		hit_cube_map.clear();
+		//解放
+		auto it_non = hit_non_cube_map.begin();
+		while( it_non != hit_non_cube_map.end() )
+		{
+			( *it_non ).second.reset();
+			++it_non;
+		}	
+		hit_non_cube_map.clear();
+		hit_cube_pos_map.clear();
 	}
-	hit_cube_map.clear();
-	//解放
-	it_non = hit_non_cube_map.begin();
-	while( it_non != hit_non_cube_map.end() )
-	{
-		( *it_non ).second.reset();
-		++it_non;
-	}
-	hit_non_cube_map.clear();
-	hit_cube_pos_map.clear();
 }
 
 //書き出し

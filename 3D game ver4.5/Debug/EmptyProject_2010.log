@@ -1,11 +1,11 @@
-﻿2014/11/27 5:16:23 にビルドを開始しました。
+﻿2014/12/06 14:58:46 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\vantan\Documents\GitHub\BOX-MAZE\3D game ver4.5\EmptyProject_2010.vcxproj" (build ターゲット)。
      1>InitializeBuildStatus:
          "AlwaysCreate" が指定されたため "Debug\EmptyProject.unsuccessfulbuild" を作成しています。
        ClCompile:
          すべての出力が最新のものです。
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IDXUT\Core /IDXUT\Optional /I"C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include" /ZI /nologo /W4 /WX- /Od /Oi /Oy- /D WIN32 /D _DEBUG /D DEBUG /D PROFILE /D _WINDOWS /D D3DXFX_LARGEADDRESS_HANDLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /openmp- /Yu"DXUT.h" /Fp"Debug\EmptyProject.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Program\Game\Scene\scene_title.cpp  
-         scene_title.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IDXUT\Core /IDXUT\Optional /I"C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include" /ZI /nologo /W4 /WX- /Od /Oi /Oy- /D WIN32 /D _DEBUG /D DEBUG /D PROFILE /D _WINDOWS /D D3DXFX_LARGEADDRESS_HANDLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /openmp- /Yu"DXUT.h" /Fp"Debug\EmptyProject.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Program\Game\Scene\scene_edit.cpp  
+         scene_edit.cpp
        ResourceCompile:
          すべての出力が最新のものです。
        ManifestResourceCompile:
@@ -70,4 +70,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:02.69
+経過時間 00:00:02.72
