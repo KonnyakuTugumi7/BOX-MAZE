@@ -10,72 +10,72 @@ void CGraphicBase::Render( const CameraBaseWP camera )
 	
 	//ワールドマトリクス設定(ローカル座標からワールド座標へ)
 	SetWldMtx();
-	m_wld_mtx = m_wld_mtx * camera.lock()->GetViewMatrix() * camera.lock()->GetProjectionMatrix();
+	m_WldMtx = m_WldMtx * camera.lock()->GetViewMatrix() * camera.lock()->GetProjectionMatrix();
 
 	//カリング設定
-	CGraphicsManager::m_pd3dDevice->SetRenderState( D3DRS_CULLMODE , m_cull_state );
+	CGraphicsManager::m_pD3dDevice->SetRenderState( D3DRS_CULLMODE , m_CullState );
 
 	//シェーダ設定
 	SetSDR();
 
-	if( m_is_render == false ) return;
+	if( m_IsRender == false ) return;
 
 	//----------------------------描画処理-------------------------------
 
 	// 3D モデルのパーツ分ループして描画
-	for( int i = 0 ; i < m_mesh->GetMaterialNum() ; i++ )
+	for( int i = 0 ; i < m_Mesh->GetMaterialNum() ; i++ )
 	{
 		// 格パーツに対応するテクスチャを設定
 		// シェーダにテクスチャを渡す
-		if( 0 != m_texs.size() )
+		if( 0 != m_Texs.size() )
 		{
-			if( NULL != m_texs[ i ] )
+			if( NULL != m_Texs[ i ] )
 			{
-				CGraphicsManager::m_sdr_use->m_sdr->SetTexture( CGraphicsManager::m_sdr_use->m_sdr_tex , m_texs[ i ]->GetTex() );
-				CGraphicsManager::m_sdr_use->m_sdr->SetVector( CGraphicsManager::m_sdr_use->m_sdr_color , &D3DXVECTOR4( 1 , 1 , 1 , 1 ) );
+				CGraphicsManager::m_SdrUse->m_Sdr->SetTexture( CGraphicsManager::m_SdrUse->m_SdrTex , m_Texs[ i ]->GetTex() );
+				CGraphicsManager::m_SdrUse->m_Sdr->SetVector( CGraphicsManager::m_SdrUse->m_SdrColor , &D3DXVECTOR4( m_Col.x , m_Col.y , m_Col.z , m_Col.w ) );
 			}
 			else
 			{
-				CGraphicsManager::m_sdr_use->m_sdr->SetVector( CGraphicsManager::m_sdr_use->m_sdr_color , &D3DXVECTOR4( m_col.x , m_col.y , m_col.z , m_col.w ) );
+				CGraphicsManager::m_SdrUse->m_Sdr->SetVector( CGraphicsManager::m_SdrUse->m_SdrColor , &D3DXVECTOR4( m_Col.x , m_Col.y , m_Col.z , m_Col.w ) );
 			}
 		}
 		else
 		{
-			CGraphicsManager::m_sdr_use->m_sdr->SetVector( CGraphicsManager::m_sdr_use->m_sdr_color , &D3DXVECTOR4( m_col.x , m_col.y , m_col.z , m_col.w ) );
+			CGraphicsManager::m_SdrUse->m_Sdr->SetVector( CGraphicsManager::m_SdrUse->m_SdrColor , &D3DXVECTOR4( m_Col.x , m_Col.y , m_Col.z , m_Col.w ) );
 		}
 
 		//シェーダの使用開始
-		CGraphicsManager::m_sdr_use->Begin();
+		CGraphicsManager::m_SdrUse->Begin();
 
 		// シェーダのパス設定
-		if( 0 != m_texs.size() )
+		if( 0 != m_Texs.size() )
 		{
-			if( !m_is_add_blend )
+			if( !m_IsAddBlend )
 			{
-				CGraphicsManager::m_sdr_use->BeginPass( 0 );
+				CGraphicsManager::m_SdrUse->BeginPass( 0 );
 			}
 			else
 			{
-				CGraphicsManager::m_sdr_use->BeginPass( 1 );
+				CGraphicsManager::m_SdrUse->BeginPass( 1 );
 			}
 		}
 		else
 		{
-			CGraphicsManager::m_sdr_use->BeginPass( 2 );
+			CGraphicsManager::m_SdrUse->BeginPass( 2 );
 		}
 
-		if( SUCCEEDED( CGraphicsManager::m_pd3dDevice->BeginScene() ) )
+		if( SUCCEEDED( CGraphicsManager::m_pD3dDevice->BeginScene() ) )
 		{
 			//パーツの描画
-			m_mesh->GetMesh()->DrawSubset( i ) ;
-			V( CGraphicsManager::m_pd3dDevice->EndScene() );
+			m_Mesh->GetMesh()->DrawSubset( i ) ;
+			V( CGraphicsManager::m_pD3dDevice->EndScene() );
 		}
 
 		//パス終了
-		CGraphicsManager::m_sdr_use->EndPass();
+		CGraphicsManager::m_SdrUse->EndPass();
 
 		//シェーダ終了
-		CGraphicsManager::m_sdr_use->End();
+		CGraphicsManager::m_SdrUse->End();
 	}
 }
 
@@ -85,32 +85,32 @@ void CGraphicBase::SetSDR()
 	//シェーダを切り替える
 	if( m_sdr_state == SDR_BASE )
 	{
-		CGraphicsManager::m_sdr_use = CGraphicsManager::m_sdr_base;
+		CGraphicsManager::m_SdrUse = CGraphicsManager::m_SdrBase;
 	}
 	else if( m_sdr_state == SDR_DIR_LIGHT )
 	{
-		CGraphicsManager::m_sdr_use = CGraphicsManager::m_sdr_dir_light;
+		CGraphicsManager::m_SdrUse = CGraphicsManager::m_SdrDirLight;
 	}
 
 	//テクニック設定
-	CGraphicsManager::m_sdr_use->m_sdr->SetTechnique( CGraphicsManager::m_sdr_use->m_sdr_technique );
+	CGraphicsManager::m_SdrUse->m_Sdr->SetTechnique( CGraphicsManager::m_SdrUse->m_SdrTechnique );
 	
 	//ワールド行列設定
-	CGraphicsManager::m_sdr_use->m_sdr->SetMatrix( CGraphicsManager::m_sdr_use->m_sdr_wvmp , &m_wld_mtx );
+	CGraphicsManager::m_SdrUse->m_Sdr->SetMatrix( CGraphicsManager::m_SdrUse->m_SdrWvmp , &m_WldMtx );
 
 	//カラー設定
-	CGraphicsManager::m_sdr_use->m_sdr->SetVector( CGraphicsManager::m_sdr_use->m_sdr_color , &m_col );
+	CGraphicsManager::m_SdrUse->m_Sdr->SetVector( CGraphicsManager::m_SdrUse->m_SdrColor , &m_Col );
 
 	//平行光源の時
 	if( m_sdr_state == SDR_DIR_LIGHT )
 	{
 		//ライトの設定
-		CGraphicsManager::m_sdr_dir_light->m_sdr->SetVector( CGraphicsManager::m_sdr_dir_light->m_dir_light , &CGraphicsManager::m_sdr_dir_light->m_dir );
+		CGraphicsManager::m_SdrDirLight->m_Sdr->SetVector( CGraphicsManager::m_SdrDirLight->m_DirLight , &CGraphicsManager::m_SdrDirLight->m_Dir );
 
 		//回転行列の設定
-		CGraphicsManager::m_sdr_dir_light->m_sdr->SetMatrix( CGraphicsManager::m_sdr_dir_light->m_rot_mtx , &m_rot_mtx );
+		CGraphicsManager::m_SdrDirLight->m_Sdr->SetMatrix( CGraphicsManager::m_SdrDirLight->m_RotMtx , &m_RotMtx );
 
 		//アンビエント色の設定
-		CGraphicsManager::m_sdr_dir_light->m_sdr->SetFloat( CGraphicsManager::m_sdr_dir_light->m_ambient , 0.08f );
+		CGraphicsManager::m_SdrDirLight->m_Sdr->SetFloat( CGraphicsManager::m_SdrDirLight->m_Ambient , 0.08f );
 	}
 }

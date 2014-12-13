@@ -23,22 +23,22 @@ typedef std::shared_ptr< CCsv > CsvSP;
 class CCsv{
 protected:
 	//ファイルパス
-	std::string m_path;
+	std::string m_Path;
 
 	//CSVファイルのデータを格納するテーブル
-	std::vector< std::vector< std::string > > m_csv_table;
+	std::vector< std::vector< std::string > > m_CsvTable;
 
 	//CSVファイルのコメントを格納するマップ
 	//key:データテーブルの何行目の値に対応するか(コメントは除く) , value:コメント
-	std::map< int , std::string > m_comment_map;
+	std::map< int , std::string > m_CommentMap;
 
 public:
 	//コンストラクタ
-	CCsv(): m_path( "" ){}
+	CCsv(): m_Path( "" ){}
 
 	//コンストラクタ
 	//引数1:ファイルパス
-	CCsv( const std::string& file_path ) : m_path( file_path )
+	CCsv( const std::string& file_path ) : m_Path( file_path )
 	{
 		//CSVファイル読み込み
 		ImportFile( file_path );
@@ -51,7 +51,7 @@ public:
 		EraseToken();
 
 		//コメント解放
-		m_comment_map.clear();
+		m_CommentMap.clear();
 	}
 
 	//生成
@@ -70,7 +70,7 @@ public:
 	bool IsImportFile() const
 	{
 		//文字列を比較して空かどうか調べる
-		if( strcmp( m_path.c_str() , "" ) == 0 ) return false;
+		if( strcmp( m_Path.c_str() , "" ) == 0 ) return false;
 
 		return true;
 	}
@@ -84,13 +84,13 @@ public:
 		if( !IsImportFile() ) return false;
 
 		//トークンテーブルが空かどうか
-		if( m_csv_table.empty() ) return false;
+		if( m_CsvTable.empty() ) return false;
 
 		//指定の行が有効かどうか
 		if( ( line < 0 ) || ( GetNumLine() <= line ) ) return false;
 
 		//指定の列が有効かどうか
-		if( ( row < 0 ) || ( ( int ) m_csv_table[ line ].size() <= row ) ) return false;
+		if( ( row < 0 ) || ( ( int ) m_CsvTable[ line ].size() <= row ) ) return false;
 
 		return true;
 	}
@@ -101,7 +101,7 @@ public:
 	virtual int FindSpecifiedTokenNum( const std::string token )
 	{
 		int num = 0;
-		for( int line = 0 ; line < GetNumLine() ; ++line ) num += std::count( m_csv_table[ line ].begin() , m_csv_table[ line ].end() , token );
+		for( int line = 0 ; line < GetNumLine() ; ++line ) num += std::count( m_CsvTable[ line ].begin() , m_CsvTable[ line ].end() , token );
 		return num;
 	}
 
@@ -123,7 +123,7 @@ public:
 		if( !IsValidPos( line , row ) ) assert( 0 );
 
 		//テーブルのトークンをint型に変換して取得
-		return strtol( ( const char* )m_csv_table[ line ][ row ].c_str() , NULL , 10 );
+		return strtol( ( const char* )m_CsvTable[ line ][ row ].c_str() , NULL , 10 );
 	}
 	//float用
 	template <>
@@ -133,7 +133,7 @@ public:
 		if( !IsValidPos( line , row ) ) assert( 0 );
 
 		//テーブルのトークンをfloat型に変換して取得
-		return ( float )strtod( ( const char* )m_csv_table[ line ][ row ].c_str() , NULL );
+		return ( float )strtod( ( const char* )m_CsvTable[ line ][ row ].c_str() , NULL );
 	}
 	//string用
 	template<>
@@ -143,7 +143,7 @@ public:
 		if( !IsValidPos( line , row ) ) assert( 0 );
 
 		//テーブルのトークンを取得
-		return m_csv_table[ line ][ row ];
+		return m_CsvTable[ line ][ row ];
 	}
 
 	//トークンサイズゲッター
@@ -154,7 +154,7 @@ public:
 		//指定セルが正しいかどうか
 		if( !IsValidPos( line , row ) ) return -1;
 
-		return ( int )m_csv_table[ line ][ row ].size();
+		return ( int )m_CsvTable[ line ][ row ].size();
 	}
 
 	//列ゲッター
@@ -165,14 +165,14 @@ public:
 		//指定セルが正しいかどうか
 		if( !IsValidPos( line , 0 ) ) return -1;
 
-		return ( int )m_csv_table[ line ].size();
+		return ( int )m_CsvTable[ line ].size();
 	}
 
 	//行ゲッター
 	//戻り値:行数
 	int GetNumLine() const
 	{
-		return ( int )m_csv_table.size();
+		return ( int )m_CsvTable.size();
 	}
 
 	//トークンセッター
@@ -184,19 +184,19 @@ public:
 		{
 			//セルを確保
 			//現在のラインより指定ラインが大きかったら
-			if( m_csv_table.size() < line + 1 ) m_csv_table.resize( ( line + 1 ) );
-			m_csv_table[ line ].resize( row + 1 );
+			if( m_CsvTable.size() < line + 1 ) m_CsvTable.resize( ( line + 1 ) );
+			m_CsvTable[ line ].resize( row + 1 );
 		}
 
 		//イテレータ
-		std::vector< std::string >::iterator it = m_csv_table[ line ].begin() + row;
+		std::vector< std::string >::iterator it = m_CsvTable[ line ].begin() + row;
 
 		//トークンをセット
-		m_csv_table[ line ].insert( it , 1 , token );
+		m_CsvTable[ line ].insert( it , 1 , token );
 
 		//std::vectorのinsert関数はイテレータが指す場所の直前に値を挿入するので
 		//挿入されたセルの1つ次のセルがにエンプティートークンが入っていたら削除する
-		std::string empty = m_csv_table[ line ][ row + 1 ];
+		std::string empty = m_CsvTable[ line ][ row + 1 ];
 		if( empty == "" )
 		{
 			EraseToken( line , row + 1 );
@@ -206,7 +206,7 @@ public:
 	//トークンオールイレーサー
 	virtual void EraseToken()
 	{
-		m_csv_table.clear();
+		m_CsvTable.clear();
 	}
 
 	//トークンイレーサー
@@ -214,10 +214,10 @@ public:
 	void EraseToken( const int line , const int row )
 	{
 		//イテレータ
-		std::vector< std::string >::iterator it = m_csv_table[ line ].begin() + row;
+		std::vector< std::string >::iterator it = m_CsvTable[ line ].begin() + row;
 
 		//削除
-		it = m_csv_table[ line ].erase( it );
+		it = m_CsvTable[ line ].erase( it );
 	}
 
 	//エンプティートークンイレーサー
@@ -227,8 +227,8 @@ public:
 		for( int i = 0 ; i < GetNumLine() ; ++i )
 		{
 			std::vector< std::string >::iterator it;
-			it = std::remove( m_csv_table[ i ].begin() , m_csv_table[ i ].end() , "" );
-			m_csv_table[ i ].erase( it , m_csv_table[ i ].end() );
+			it = std::remove( m_CsvTable[ i ].begin() , m_CsvTable[ i ].end() , "" );
+			m_CsvTable[ i ].erase( it , m_CsvTable[ i ].end() );
 		}
 	}
 };

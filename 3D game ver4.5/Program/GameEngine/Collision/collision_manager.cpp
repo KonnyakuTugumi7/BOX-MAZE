@@ -159,7 +159,7 @@ void CCollisionManager::ScreenToRay( D3DXVECTOR3& pos , D3DXVECTOR3& dir , const
 	D3DXMatrixIdentity( &vpMat );
 
 	D3DVIEWPORT9 vp;
-	CGraphicsManager::m_pd3dDevice->GetViewport( &vp );
+	CGraphicsManager::m_pD3dDevice->GetViewport( &vp );
 
 	vpMat._11 = ( float )vp.Width * 0.5f;
 	vpMat._22 = -1.0f * ( float )( vp.Height * 0.5f );

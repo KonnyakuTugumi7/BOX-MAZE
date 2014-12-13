@@ -15,31 +15,31 @@ typedef std::shared_ptr< CTime > TimeSP;
 class CAnimation{
 protected:
 	//ループフラグ
-	bool m_is_loop;
+	bool m_IsLoop;
 
 	//描画フラグ
-	bool m_is_active;
+	bool m_IsActive;
 
 	//アニメフレーム番号
-	int m_animation_frame;
+	int m_AnimationFrame;
 
 	//画像のサイズ
-	D3DXVECTOR3 m_img_size;
+	D3DXVECTOR3 m_ImgSize;
 
 	//画像の中心座標
-	D3DXVECTOR3 m_center;
+	D3DXVECTOR3 m_Center;
 
 	//画像を分割して描画する範囲を格納
-	std::vector< RECT > m_rect;
+	std::vector< RECT > m_Rect;
 
 	//画像情報(幅や高さなど)の取得用
-	D3DXIMAGE_INFO m_image_info;
+	D3DXIMAGE_INFO m_ImageInfo;
 
 	//画像データ(テクスチャ)
-	LPDIRECT3DTEXTURE9 m_texture;
+	LPDIRECT3DTEXTURE9 m_Texture;
 
 	//アニメーション用タイマー
-	TimeSP m_animation_timer;
+	TimeSP m_AnimationTimer;
 
 public:
 	//コンストラクタ

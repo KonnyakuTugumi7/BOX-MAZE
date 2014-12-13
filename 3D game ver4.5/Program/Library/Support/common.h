@@ -8,7 +8,7 @@
 class CCommon{
 public:
 	//DirectXのデバイスへのポインタ
-	static IDirect3DDevice9* m_pd3dDevice;
+	static IDirect3DDevice9* m_pD3dDevice;
 
 	// ワイド文字への変換
 	static HRESULT DXconvAnsiToWide( WCHAR* wstrDest, const CHAR* strSrc, const int ct );

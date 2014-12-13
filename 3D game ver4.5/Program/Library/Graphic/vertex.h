@@ -10,22 +10,22 @@ typedef std::shared_ptr< CVertex > VertexSP;
 class CVertex{
 public:
 	//座標
-    D3DXVECTOR3 m_pos;
+    D3DXVECTOR3 m_Pos;
 	
 	//法線
-	D3DXVECTOR3 m_nml;
+	D3DXVECTOR3 m_Nml;
 
 	//UV
-	D3DXVECTOR2	m_uv;
+	D3DXVECTOR2	m_Uv;
 
 	//FVFコード
 	static const WORD FVF = D3DFVF_XYZ | D3DFVF_NORMAL | D3DFVF_TEX1;
 
 public:
 	//コンストラクタ
-	CVertex() : m_pos( 0 , 0 , 0 ) , 
-				m_nml( 0 , 0 , 0 ) , 
-				m_uv(  0 , 0  )
+	CVertex() : m_Pos( 0 , 0 , 0 ) , 
+				m_Nml( 0 , 0 , 0 ) , 
+				m_Uv(  0 , 0  )
 	{}
 
 	//デストラクタ

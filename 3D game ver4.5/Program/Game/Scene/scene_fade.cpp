@@ -16,62 +16,70 @@
 void CSceneFade::SceneInit()
 {
 	//CSV
-	m_csv = CCsv::Create( "Content/csv/FadeData.csv" );
+	m_Csv = CCsv::Create( "Content/csv/FadeData.csv" );
 
 	//カメラ
-	m_camera = CTPCamera::Create();
+	m_Camera = CTPCamera::Create();
 
 	//フェード状態管理ナンバー
-	m_fade_mode = FADE_NON;
-
-	//フェード用画像ロード
-	//m_fade = CSprite::Create( "Content/graphics/fade_img.bmp" , CGraphicsManager::FRONT_2D );
-	m_fade = std::make_shared< CSprite >();
-	m_fade->Init( "Content/graphics/fade_img.bmp" );
-	m_fade->m_pos = D3DXVECTOR3( m_csv->GetToken< int >( 0 , 0 ) , m_csv->GetToken< int >( 0 , 1 ) , 0 );
-	m_fade->m_col = D3DXVECTOR4( 1 , 1 , 1 , 0 );
-	m_fade->SetCameraDistance( 0.1f );
+	m_FadeMode = FADE_NON;
+	
+	//フェード画像
+	//m_Fade = CBoard::Create( CGraphicsManager::m_WindowWidth , CGraphicsManager::m_WindowHeight , "Content/graphics/fade_img.bmp" , CGraphicsManager::RENDERLIST_STATE::FRONT_2D );
+	m_Fade = std::make_shared< CBoard >();
+	m_Fade->Init( CGraphicsManager::m_WindowWidth , CGraphicsManager::m_WindowHeight , "Content/graphics/fade_img.bmp" );
+	m_Fade->m_Col = D3DXVECTOR4( 1 , 1 , 1 , 0 );
+	m_Fade->SetCameraDistance( 0.1f );
+	m_Fade->SetIsRender( false );
 }
 
 //解放処理
 void CSceneFade::SceneDelete()
 {
 	//フェード画像解放
-	m_fade.reset();
+	m_Fade.reset();
 }
 
 //ロジック処理
 void CSceneFade::SceneFrameMove( const float elapsed_time )
 {	
 	//フェード中でなければ以下の処理を行わない
-	if( m_fade_mode == FADE_NON ) return;
+	if( m_FadeMode == FADE_NON )
+	{
+		m_Fade->SetIsRender( false );
+		return;
+	}
+	else
+	{
+		m_Fade->SetIsRender( true );
+	}
 
 	//少しずつアルファ値を入れていく
-	m_fade->m_col.w += 1.0f / m_fade_mode * elapsed_time;
+	m_Fade->m_Col.w += 1.0f / m_FadeMode * elapsed_time;
 
 	//フェードイン
-	if( m_fade_mode == FADE_IN )
+	if( m_FadeMode == FADE_IN )
 	{
 		//予約されているシーケンスに移行
-		if( 0.0f > m_fade->m_col.w )
+		if( 0.0f > m_Fade->m_Col.w )
 		{
 			//念のためリミット
-			m_fade->m_col.w = 0.0f;
+			m_Fade->m_Col.w = 0.0f;
 
 			//通常状態へ
-			m_fade_mode = FADE_NON;
+			m_FadeMode = FADE_NON;
 		}
 	}
 	//フェードアウト
-	else if( m_fade_mode == FADE_OUT )
+	else if( m_FadeMode == FADE_OUT )
 	{
-		if( 1.0f < m_fade->m_col.w )
+		if( 1.0f < m_Fade->m_Col.w )
 		{	
 			//念のためリミット
-			m_fade->m_col.w = 1.0f;
+			m_Fade->m_Col.w = 1.0f;
 
 			//フェードインへ
-			m_fade_mode = FADE_IN;
+			m_FadeMode = FADE_IN;
 		}
 	}
 }
@@ -80,8 +88,8 @@ void CSceneFade::SceneFrameMove( const float elapsed_time )
 void CSceneFade::SceneFrameRender( const float elapsed_time )
 {
 	//フェード中でなければ以下の処理を行わない
-	if( m_fade_mode == FADE_NON ) return;
+	if( m_FadeMode == FADE_NON ) return;
 
 	//描画
-	m_fade->Render( m_camera );
+	m_Fade->Render( m_Camera );
 }

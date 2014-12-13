@@ -12,13 +12,13 @@ typedef std::shared_ptr< CTexture > TextureSP;
 class CTexture{
 private:
 	//名前
-	std::string	m_name;
+	std::string	m_Name;
 
 	//DirectX テクスチャ
-	LPDIRECT3DTEXTURE9 m_directx_tex;
+	LPDIRECT3DTEXTURE9 m_DirectxTex;
 
 	//管理マップ
-	static std::map< std::string , TextureSP > m_textures;
+	static std::map< std::string , TextureSP > m_Textures;
 
 public:
 	//コンストラクタ
@@ -39,7 +39,7 @@ public:
 	static void Destroy( const std::string name = "all" );
 
 	//テクスチャゲッター
-	LPDIRECT3DTEXTURE9 GetTex(){ return m_directx_tex; }
+	LPDIRECT3DTEXTURE9 GetTex(){ return m_DirectxTex; }
 
 	//テクスチャセッター
 	//tex: テクスチャ
@@ -47,7 +47,7 @@ public:
 	{
 		//テクスチャの参照カウンタを増やし、古いテクスチャを開放してから新しいテクスチャを設定
 		if( tex ) tex->AddRef();
-		if( m_directx_tex ) m_directx_tex->Release();
-		m_directx_tex = tex;
+		if( m_DirectxTex ) m_DirectxTex->Release();
+		m_DirectxTex = tex;
 	}
 };

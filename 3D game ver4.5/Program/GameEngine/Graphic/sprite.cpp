@@ -22,7 +22,7 @@ SpriteSP CSprite::Create( const std::string file_name , const CGraphicsManager::
 void CSprite::Init( const std::string file_name , const int x_num , const int y_num )
 {
 	//名前
-	m_name = file_name;
+	m_Name = file_name;
 
 	//----------------------------------------------------------------------------
 	// ファイル名を WCHAR に変換
@@ -31,7 +31,7 @@ void CSprite::Init( const std::string file_name , const int x_num , const int y_
 	
 	//----------------------------------------------------------------------------
 	// テクスチャのロード
-	if( FAILED(D3DXCreateTextureFromFileEx( CGraphicsManager::m_pd3dDevice,
+	if( FAILED(D3DXCreateTextureFromFileEx( CGraphicsManager::m_pD3dDevice,
 		buff_name,			// ファイルパス
 		D3DX_DEFAULT,
 		D3DX_DEFAULT,
@@ -42,22 +42,22 @@ void CSprite::Init( const std::string file_name , const int x_num , const int y_
 		D3DX_FILTER_NONE,
 		D3DX_DEFAULT,
 		D3DXCOLOR(0,0,0,0),	// カラーキーの設定( 透明色 )　※ 全て0指定でカラーキーなし
-		&m_image_info,		// 画像情報の取得
+		&m_ImageInfo,		// 画像情報の取得
 		NULL,
-		&m_texture			// テクスチャの受け取り
+		&m_Texture			// テクスチャの受け取り
 	) ) );
 
 	//テクスチャからサーフェイスを取得
 	IDirect3DSurface9 *pSurface;
-	m_texture->GetSurfaceLevel( 0 , &pSurface );
+	m_Texture->GetSurfaceLevel( 0 , &pSurface );
 
 	//サーフェイス情報から画像サイズを取得
 	D3DSURFACE_DESC SurfaceInfo;
 	pSurface->GetDesc( &SurfaceInfo );
 
 	//分割する画像の1つの大きさ
-	int x_split = m_image_info.Width / x_num;
-	int y_split = m_image_info.Height / y_num;
+	int x_split = m_ImageInfo.Width / x_num;
+	int y_split = m_ImageInfo.Height / y_num;
 
 	//画像を分割して描画する範囲を格納する
 	for( int y = 0 ; y < y_num ; ++y )
@@ -65,24 +65,24 @@ void CSprite::Init( const std::string file_name , const int x_num , const int y_
 		for( int x = 0 ; x < x_num ; ++x )
 		{
 			RECT rect = { x * x_split , y * y_split , ( x + 1 ) * x_split , ( y + 1 ) * y_split };
-			m_rect.push_back( rect );
+			m_Rect.push_back( rect );
 		}
 	}
 
 	//画像のサイズ
-	m_img_size = D3DXVECTOR3( m_image_info.Width , m_image_info.Height , 0 );
+	m_ImgSize = D3DXVECTOR3( m_ImageInfo.Width , m_ImageInfo.Height , 0 );
 
 	//画像の中心
-	m_center = D3DXVECTOR3( m_img_size.x / x_num * 0.5f , m_img_size.y / y_num * 0.5f , 0 );
+	m_Center = D3DXVECTOR3( m_ImgSize.x / x_num * 0.5f , m_ImgSize.y / y_num * 0.5f , 0 );
 
 	//使い終わったのでサーフェイス情報は解放
 	SAFE_RELEASE( pSurface ) ;
 
 	//スプライトの生成
-	D3DXCreateSprite( CGraphicsManager::m_pd3dDevice , &m_sprite );
+	D3DXCreateSprite( CGraphicsManager::m_pD3dDevice , &m_Sprite );
 
 	//ソートに使う値
-	m_camera_distance = 1.0f;
+	m_CameraDistance = 1.0f;
 }
 
 //描画
@@ -94,54 +94,54 @@ void CSprite::Render( const CameraBaseWP camera )
 	SetWldMtx();
 
 	//スプライトにワールドマトリクスを設定
-	m_sprite->SetTransform( &m_wld_mtx );
+	m_Sprite->SetTransform( &m_WldMtx );
 
 	//描画フラグがオフの時以下の処理を行わない
-	if( m_is_render == false ) return;
+	if( m_IsRender == false ) return;
 
 	//加算ブレンドの設定
-	if( m_is_add_blend )
+	if( m_IsAddBlend )
 	{
-		CGraphicsManager::m_pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE );
-		CGraphicsManager::m_pd3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG1 );
-		CGraphicsManager::m_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
-		CGraphicsManager::m_pd3dDevice->SetRenderState( D3DRS_BLENDOP, D3DBLENDOP_ADD );
-		CGraphicsManager::m_pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
-		CGraphicsManager::m_pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_ONE );
+		CGraphicsManager::m_pD3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE );
+		CGraphicsManager::m_pD3dDevice->SetTextureStageState( 0, D3DTSS_ALPHAOP, D3DTOP_SELECTARG1 );
+		CGraphicsManager::m_pD3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
+		CGraphicsManager::m_pD3dDevice->SetRenderState( D3DRS_BLENDOP, D3DBLENDOP_ADD );
+		CGraphicsManager::m_pD3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
+		CGraphicsManager::m_pD3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_ONE );
 	}
 	else
 	{
-		CGraphicsManager::m_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );
+		CGraphicsManager::m_pD3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );
 	}
 
 	//デバイスの描画準備
-	if( SUCCEEDED( CGraphicsManager::m_pd3dDevice->BeginScene() ) )
+	if( SUCCEEDED( CGraphicsManager::m_pD3dDevice->BeginScene() ) )
 	{
 		//スプライトの描画準備
-		m_sprite->Begin( D3DXSPRITE_ALPHABLEND );
+		m_Sprite->Begin( D3DXSPRITE_ALPHABLEND );
 
 		//スプライトの描画命令
-		m_sprite->Draw(	m_texture ,							//描画に使用するテクスチャ
-			&m_rect[ m_animation_frame ] ,					//画像の描画範囲
-			&m_center ,										//サーフェイスの中心
+		m_Sprite->Draw(	m_Texture ,							//描画に使用するテクスチャ
+			&m_Rect[ m_AnimationFrame ] ,					//画像の描画範囲
+			&m_Center ,										//サーフェイスの中心
 			&D3DXVECTOR3( 0 , 0 , 0 ) ,						//描画座標(行列で制御するので 0,0,0 でOK)
-			D3DCOLOR_ARGB( ( int )( m_col.w * 255.0f ) ,	//アルファと色
-						   ( int )( m_col.x * 255 ) , 
-						   ( int )( m_col.y * 255 ) , 
-						   ( int )( m_col.z * 255 ) )
+			D3DCOLOR_ARGB( ( int )( m_Col.w * 255.0f ) ,	//アルファと色
+						   ( int )( m_Col.x * 255 ) , 
+						   ( int )( m_Col.y * 255 ) , 
+						   ( int )( m_Col.z * 255 ) )
 			);
 
 		//加算切り替え
-		if( m_is_add_blend )
+		if( m_IsAddBlend )
 		{
-			m_sprite->Flush();
+			m_Sprite->Flush();
 		}
 		else
 		{
-			m_sprite->End();
+			m_Sprite->End();
 		}
 
 		//描画終了
-		V( CGraphicsManager::m_pd3dDevice->EndScene() );
+		V( CGraphicsManager::m_pD3dDevice->EndScene() );
 	}
 }

@@ -61,7 +61,7 @@ HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURF
 	//_CrtSetBreakAlloc();
 
 	//デバイスへのポインタに代入
-	CCommon::m_pd3dDevice = pd3dDevice;
+	CCommon::m_pD3dDevice = pd3dDevice;
 
 	//グラフィクスマネージャ初期化
 	CGraphicsManager::Initialize( pd3dDevice );

@@ -21,10 +21,10 @@ typedef std::shared_ptr< CSprite > SpriteSP;
 class CSprite : public CAnimation , public CGraphicBase{
 private:
 	//スプライト(DirectXの2Dを扱うクラス)
-	LPD3DXSPRITE m_sprite;
+	LPD3DXSPRITE m_Sprite;
 
 	//ファイル名
-	std::string m_name;
+	std::string m_Name;
 
 public:
 	//コンストラクタ
@@ -34,7 +34,7 @@ public:
 	~CSprite()
 	{
 		//スプライトの解放
-		SAFE_RELEASE( m_sprite );
+		SAFE_RELEASE( m_Sprite );
 	}
 
 	//生成

@@ -6,7 +6,7 @@
 void CCsv::ImportFile( const std::string& file_path )
 {
 	//ファイルパス
-	m_path = file_path;
+	m_Path = file_path;
 
 	//入力ストリーム
 	std::ifstream fin;
@@ -38,7 +38,7 @@ void CCsv::ImportFile( const std::string& file_path )
 	std::vector< std::string > line_token;
 
 	//テーブルの中身を一掃
-	m_csv_table.clear();
+	m_CsvTable.clear();
 
 	//カウンタ
 	int count = 0;
@@ -56,7 +56,7 @@ void CCsv::ImportFile( const std::string& file_path )
 		if( new_line.find( "//" ) != new_line.npos )
 		{
 			//コメントを格納
-			m_comment_map.insert( std::make_pair( count , new_line ) );
+			m_CommentMap.insert( std::make_pair( count , new_line ) );
 
 			continue;
 		}
@@ -80,7 +80,7 @@ void CCsv::ImportFile( const std::string& file_path )
 				{
 					//終端まで来たらテーブルにトークンを格納してループを抜ける
 					line_token.push_back( c_new_line );
-					m_csv_table.push_back( line_token );
+					m_CsvTable.push_back( line_token );
 					break;
 				}
 			}
@@ -93,7 +93,7 @@ void CCsv::ImportFile( const std::string& file_path )
 				if( tk == NULL )
 				{
 					//終端まで来たらテーブルにトークンを格納してループを抜ける
-					m_csv_table.push_back( line_token );
+					m_CsvTable.push_back( line_token );
 					break;
 				}
 			}
@@ -115,7 +115,7 @@ void CCsv::ExportFile()
 	std::ofstream ofs;
 
 	//ファイルを開いた時に以前の中身を全て削除する
-	ofs.open( m_path , std::ios::trunc );
+	ofs.open( m_Path , std::ios::trunc );
 
 	//開けていなかったらエラーを返す
 	if( !ofs.is_open() ) assert( 0 );
@@ -124,8 +124,8 @@ void CCsv::ExportFile()
 	for( int line = 0 ; line < GetNumLine() ; ++line )
 	{
 		//コメント
-		std::map< int , std::string >::iterator it = m_comment_map.find( line );
-		if( it != m_comment_map.end() )
+		std::map< int , std::string >::iterator it = m_CommentMap.find( line );
+		if( it != m_CommentMap.end() )
 		{
 			//コメント書き出し
 			ofs << ( *it ).second;
@@ -148,7 +148,7 @@ void CCsv::ExportFile()
 			}
 
 			//トークン書き出し
-			ofs << m_csv_table[ line ][ row ];
+			ofs << m_CsvTable[ line ][ row ];
 
 			//セパレータ打ち込み
 			if( IsValidPos( line , row + 1 ) == true )

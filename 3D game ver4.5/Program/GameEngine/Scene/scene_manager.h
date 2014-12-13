@@ -9,13 +9,13 @@
 class CSceneManager{
 private:
 	//フェードシーン
-	SceneFadeSP m_fade;
+	SceneFadeSP m_Fade;
 
 	//現在のシーンのポインタ
-	SceneBaseSP m_scene_main;
+	SceneBaseSP m_SceneMain;
 
 	//次のシーンのCreateSceneを呼ぶときに使う関数ポインタ(フェードアウトが終わったタイミングで呼び出すために関数ポインタを使用)
-	SceneBaseSP ( *m_scene_next )();
+	SceneBaseSP ( *m_SceneNext )();
 
 private:
 	//コンストラクタ

@@ -11,24 +11,24 @@ typedef std::shared_ptr< CSceneBase > SceneBaseSP;
 class CSceneBase{
 protected:
 	//サウンドID
-	int m_sound_id;
+	int m_SoundId;
 
 	//CSV
-	CsvSP m_csv;
+	CsvSP m_Csv;
 
 	//カメラインスタンス
-	CameraBaseSP m_camera;
+	CameraBaseSP m_Camera;
 
 public:
 	//コンストラクタ
-	CSceneBase() : m_sound_id( 0 )
+	CSceneBase() : m_SoundId( 0 )
 	{}
 
 	//仮想デストラクタ
 	virtual ~CSceneBase()
 	{
-		m_csv.reset();
-		m_camera.reset();
+		m_Csv.reset();
+		m_Camera.reset();
 	}
 
 	//初期化

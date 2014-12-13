@@ -11,7 +11,7 @@ typedef std::shared_ptr< CViewCamera > ViewCameraSP;
 class CViewCamera : public CCameraBase{
 private:
 	//z値
-	float m_distance;
+	float m_Distance;
 
 public:
 	//コンストラクタ

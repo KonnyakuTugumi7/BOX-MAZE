@@ -18,7 +18,7 @@ public:
 	D3DXHANDLE m_LWVPT;
 
 	//デプスバッファサーフェイスのテクスチャー
-	D3DXHANDLE m_dep_tex;
+	D3DXHANDLE m_DepTex;
 
 	//ライトの方向
 	D3DXHANDLE m_LightDir;
@@ -34,10 +34,10 @@ public:
 	//----------------------------------------------------
 
 	//ビュー行列
-	D3DXMATRIX m_matView;
+	D3DXMATRIX m_MatView;
 
 	//プロジェクション行列
-	D3DXMATRIX m_matProj;
+	D3DXMATRIX m_MatProj;
 
 public:
 	//コンストラクタ
@@ -69,9 +69,9 @@ public:
 	//引数1:バイアス値
 	void SetBias( const float& bias )
 	{
-		if( m_sdr )
+		if( m_Sdr )
 		{
-			m_sdr->SetFloat( m_Bias , bias );
+			m_Sdr->SetFloat( m_Bias , bias );
 		}
 	}
 
@@ -79,9 +79,9 @@ public:
 	//引数1:影の色(1.0fで完全に黒になる)
 	void SetShadowColor( const float& shadow_color )
 	{
-		if( m_sdr )
+		if( m_Sdr )
 		{
-			m_sdr->SetFloat( m_ShadowColor , shadow_color );
+			m_Sdr->SetFloat( m_ShadowColor , shadow_color );
 		}
 	}
 };

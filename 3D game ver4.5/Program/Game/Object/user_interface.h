@@ -2,6 +2,7 @@
 
 #include "DXUT.h"
 #include "../../GameEngine/Graphic/sprite.h"
+#include "../../GameEngine/Graphic/board.h"
 #include "../../Library/Support/csv.h"
 #include <memory>
 
@@ -12,19 +13,19 @@ typedef std::shared_ptr< CUserInterface > UserInterfaceSP;
 class CUserInterface{
 private:
 	//CSV
-	CsvSP m_csv;
+	CsvSP m_Csv;
 
 	//矢印の下の丸
-	SpriteSP m_circle;
+	BoardSP m_Circle;
 
 	//矢印
-	SpriteSP m_arrow;
+	BoardSP m_Arrow;
 
 	//サークル点滅
-	int m_flash;
+	int m_Flash;
 
 	//サークル点滅値
-	float m_flash_min , m_flash_max;
+	float m_FlashMin , m_FlashMax;
 
 public:
 	//コンストラクタ

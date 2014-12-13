@@ -18,10 +18,10 @@ typedef std::shared_ptr< CScenePlay > ScenePlaySP;
 class CScenePlay : public CSceneBase{
 private:
 	//キューブマネージャ
-	CubeManagerSP m_cube_manager;
+	CubeManagerSP m_CubeManager;
 
 	//ユーザーインターフェース
-	UserInterfaceSP m_ui;
+	UserInterfaceSP m_Ui;
 
 public:
 	//インスタンス作成

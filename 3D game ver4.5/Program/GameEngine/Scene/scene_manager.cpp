@@ -13,30 +13,30 @@
 void CSceneManager::InitSceneManager()
 {
 	//インスタンス作成
-	m_scene_main = std::make_shared< CSceneTitle >();
+	m_SceneMain = std::make_shared< CSceneTitle >();
 
 	//サウンド再生
-	m_scene_main->ScenePlaySound();
+	m_SceneMain->ScenePlaySound();
 
 	//フェードシーン作成
-	m_fade = CSceneFade::CreateScene();
+	m_Fade = CSceneFade::CreateScene();
 }
 
 //解放
 void CSceneManager::DeleteSceneManager()
 {
 	//解放
-	m_scene_main.reset();
-	m_fade.reset();
+	m_SceneMain.reset();
+	m_Fade.reset();
 }
 
 void CSceneManager::SetNextScene( SceneBaseSP ( *next )() )
 {
 	//シーンのを予約
-	m_scene_next = next;
+	m_SceneNext = next;
 
 	//フェードアウト
-	m_fade->SetFadeState( m_fade->FADE_OUT );
+	m_Fade->SetFadeState( m_Fade->FADE_OUT );
 }
 
 
@@ -44,16 +44,16 @@ void CSceneManager::SetNextScene( SceneBaseSP ( *next )() )
 void CSceneManager::ChangeScene()
 {
 	//サウンド停止
-	m_scene_main->SceneStopSound();
+	m_SceneMain->SceneStopSound();
 
 	//シーン移動
-	m_scene_main = m_scene_next();
+	m_SceneMain = m_SceneNext();
 
 	//シーン予約をリセット
-	m_scene_next = NULL;
+	m_SceneNext = NULL;
 
 	//サウンド再生
-	m_scene_main->ScenePlaySound();
+	m_SceneMain->ScenePlaySound();
 }
 
 //ロジック
@@ -66,7 +66,7 @@ void CSceneManager::FrameMove( const float elapsed_time )
     MOUSE->Update();
 
 	//キーボード&マウスロック
-	if( m_fade->GetFadeState() == m_fade->FADE_IN || m_fade->GetFadeState() == m_fade->FADE_OUT )
+	if( m_Fade->GetFadeState() == m_Fade->FADE_IN || m_Fade->GetFadeState() == m_Fade->FADE_OUT )
 	{
 		K_B->SetIsActive( false );
 		MOUSE->SetIsActive( false );
@@ -85,14 +85,14 @@ void CSceneManager::FrameMove( const float elapsed_time )
 	CGraphicsManager::Update();
 
 	//メインロジック
-	m_scene_main->SceneFrameMove( elapsed_time );
+	m_SceneMain->SceneFrameMove( elapsed_time );
 
 	//フェードロジック
-	m_fade->SceneFrameMove( elapsed_time );
+	m_Fade->SceneFrameMove( elapsed_time );
 
 	//シーンチェンジ
 	//次のシーンが予約されていた時かつフェードインの時
-	if( m_scene_next != NULL && m_fade->GetFadeState() == m_fade->FADE_IN )
+	if( m_SceneNext != NULL && m_Fade->GetFadeState() == m_Fade->FADE_IN )
 	{
 		ChangeScene();
 	}
@@ -102,8 +102,8 @@ void CSceneManager::FrameMove( const float elapsed_time )
 void CSceneManager::FrameRender( const float elapsed_time )
 {
 	//メイン描画
-	m_scene_main->SceneFrameRender( elapsed_time );
+	m_SceneMain->SceneFrameRender( elapsed_time );
 
 	//フェード描画
-	m_fade->SceneFrameRender( elapsed_time );
+	m_Fade->SceneFrameRender( elapsed_time );
 }

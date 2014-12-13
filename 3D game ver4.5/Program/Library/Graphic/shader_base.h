@@ -11,21 +11,21 @@ typedef std::shared_ptr< CShaderBase > ShaderBaseSP;
 class CShaderBase{
 public:
 	//シェーダ本体
-	LPD3DXEFFECT m_sdr;
+	LPD3DXEFFECT m_Sdr;
 
 	//-----------ハンドル-----------
 	//テクニック
-	D3DXHANDLE m_sdr_technique;
+	D3DXHANDLE m_SdrTechnique;
 
 	//テクスチャ
-	D3DXHANDLE m_sdr_tex;
+	D3DXHANDLE m_SdrTex;
 
 	//カラー
-	D3DXHANDLE m_sdr_color;
+	D3DXHANDLE m_SdrColor;
 	//------------------------------
 
 	//ワールド x ビュー x プロジェクション行列
-	D3DXHANDLE m_sdr_wvmp;
+	D3DXHANDLE m_SdrWvmp;
 
 public:
 	//コンストラクタ
@@ -39,7 +39,7 @@ public:
 	virtual ~CShaderBase()
 	{
 		//シェーダ解放
-		SAFE_RELEASE( m_sdr );
+		SAFE_RELEASE( m_Sdr );
 	}
 
 	//生成
@@ -47,14 +47,14 @@ public:
 	static ShaderBaseSP Create( const std::string& file_pass ){ return std::make_shared< CShaderBase >( file_pass ); }
 
 	//シェーダ開始
-	virtual void Begin(){ if( m_sdr ) m_sdr->Begin( NULL , 0 ); }
+	virtual void Begin(){ if( m_Sdr ) m_Sdr->Begin( NULL , 0 ); }
 
 	//シェーダ終了
-	void End(){ if( m_sdr ) m_sdr->End(); }
+	void End(){ if( m_Sdr ) m_Sdr->End(); }
 
 	//シェーダパス開始
-	void BeginPass( const UINT pass ){ if( m_sdr ) m_sdr->BeginPass( pass ); }
+	void BeginPass( const UINT pass ){ if( m_Sdr ) m_Sdr->BeginPass( pass ); }
 
 	//シェーダパス終了
-	void EndPass(){ if( m_sdr ) m_sdr->EndPass(); }
+	void EndPass(){ if( m_Sdr ) m_Sdr->EndPass(); }
 };

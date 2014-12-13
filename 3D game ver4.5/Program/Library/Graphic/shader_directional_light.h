@@ -13,17 +13,17 @@ class CShaderDirectionalLight : public CShaderBase{
 public:
 	//--------------ハンドル--------------
 	//平行光源の向き
-	D3DXHANDLE m_dir_light;
+	D3DXHANDLE m_DirLight;
 
 	//回転行列
-	D3DXHANDLE m_rot_mtx;
+	D3DXHANDLE m_RotMtx;
 
 	//アンビエント色
-	D3DXHANDLE m_ambient;
+	D3DXHANDLE m_Ambient;
 	//------------------------------------
 
 	//平行光源の向き
-	D3DXVECTOR4 m_dir;
+	D3DXVECTOR4 m_Dir;
 
 public:
 	//コンストラクタ

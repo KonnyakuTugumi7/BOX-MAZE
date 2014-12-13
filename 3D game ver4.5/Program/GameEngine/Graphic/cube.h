@@ -19,16 +19,16 @@ typedef std::weak_ptr< CCube > CubeWP;
 class CCube : public CGraphicBase{
 private:
 	//キューブの種類
-	int m_cube_state;
+	int m_CubeState;
 
 	//キューブサイズ
-	D3DXVECTOR3 m_length;
+	D3DXVECTOR3 m_Length;
 
 	//板ポリ
-	std::vector< std::shared_ptr< CBoard > > m_board_vec;
+	std::vector< std::shared_ptr< CBoard > > m_BoardVec;
 
 	//CSV
-	CsvSP m_csv;
+	CsvSP m_Csv;
 
 public:
 	//板ポリナンバー
@@ -50,14 +50,14 @@ public:
 	~CCube()
 	{
 		//解放
-		auto it = m_board_vec.begin();
-		while( it != m_board_vec.end() )
+		auto it = m_BoardVec.begin();
+		while( it != m_BoardVec.end() )
 		{
 			( *it ).reset();
 			++it;
 		}
-		m_board_vec.clear();
-		m_csv.reset();
+		m_BoardVec.clear();
+		m_Csv.reset();
 	}
 
 	//生成
@@ -73,16 +73,16 @@ public:
 	virtual void Render( const CameraBaseWP camera );
 
 	//板ポリサイズゲッター
-	D3DXVECTOR3 GetSize(){ return m_length; }
+	D3DXVECTOR3 GetSize(){ return m_Length; }
 
 	//キューブステータスゲッター
-	inline int GetCubeState(){ return m_cube_state; }
+	inline int GetCubeState(){ return m_CubeState; }
 
 	//キューブステータスセッター
-	inline void SetCubeState( const int state ){ m_cube_state = state; }
+	inline void SetCubeState( const int state ){ m_CubeState = state; }
 
 	//板ポリゲッター
-	inline std::vector< std::shared_ptr< CBoard > > GetBoard(){ return m_board_vec; }
+	inline std::vector< std::shared_ptr< CBoard > > GetBoard(){ return m_BoardVec; }
 
 	//板ポリセッター(指定された板ポリのテクスチャを設定する)
 	//引数1:テクスチャ , 引数2:どこの板ポリか0～5(順番にTop , Left , Back , Right , Front , Bottom)

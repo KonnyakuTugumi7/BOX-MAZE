@@ -4,6 +4,7 @@
 #include "../../Library/Support/csv.h"
 #include "../../GameEngine/Scene/scene_base.h"
 #include "../../GameEngine/Graphic/sprite.h"
+#include "../../GameEngine/Graphic/board.h"
 #include <map>
 #include <list>
 #include <time.h>
@@ -15,11 +16,11 @@ typedef std::shared_ptr< CSceneFade > SceneFadeSP;
 class CSceneFade : public CSceneBase{
 private:
 	//フェード用画像
-	SpriteSP m_fade;
+	BoardSP m_Fade;
 
 	//フェード管理
 	enum FADE_MODE;
-	FADE_MODE m_fade_mode;
+	FADE_MODE m_FadeMode;
 
 public:
 	//フェード管理
@@ -74,8 +75,8 @@ public:
 	void SceneStopSound(){}
 
 	//フェード状態ゲッター
-	FADE_MODE GetFadeState(){ return m_fade_mode; }
+	FADE_MODE GetFadeState(){ return m_FadeMode; }
 
 	//フェード状態セッター
-	void SetFadeState( const FADE_MODE mode ){ m_fade_mode = mode; }
+	void SetFadeState( const FADE_MODE mode ){ m_FadeMode = mode; }
 };

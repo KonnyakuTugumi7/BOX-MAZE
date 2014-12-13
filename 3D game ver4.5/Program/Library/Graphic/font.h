@@ -17,14 +17,14 @@ typedef std::shared_ptr< CFont > FontSP;
 class CFont : public CBoard{
 private:
 	//テクスチャのデータマップ
-	std::hash_map<wchar_t, LPDIRECT3DTEXTURE9> m_data;
+	std::hash_map<wchar_t, LPDIRECT3DTEXTURE9> m_Data;
 
 	//整列順
 	enum Align;
-	Align m_align;
+	Align m_Align;
 
 	//スケール
-	D3DXVECTOR3 m_scale;
+	D3DXVECTOR3 m_Scale;
 
 private:
 	//描画
@@ -33,13 +33,20 @@ private:
 
 public:
 	//生成
-	static FontSP Create(){ return std::make_shared< CFont >(); }
+	static FontSP Create()
+	{
+		FontSP font = std::make_shared< CFont >();
+		//レンダリングリストへの登録
+		//CGraphicsManager::RegistObj( font , CGraphicsManager::RENDERLIST_STATE::FRONT_2D );
+		return font;
+	}
 
 	//コンストラクタ
-	CFont() : m_align( CFont::LEFT ) , m_scale( 1.0f , 1.0f , 1.0f )
+	CFont() : m_Align( CFont::LEFT ) , m_Scale( 1.0f , 1.0f , 1.0f )
 	{
 		Init( 1 , 1 );
-		m_texs.push_back( CTexture::CreateEmptyTex( 1.0f , 1.0f ) );
+		m_Texs.push_back( CTexture::CreateEmptyTex( 1.0f , 1.0f ) );
+		//m_CameraDistance = 1.0f;
 	}
 
 	//デストラクタ
@@ -57,11 +64,11 @@ public:
 	void Draw( const CameraBaseWP camera , const std::wstring& string , const D3DXVECTOR2& pos , const D3DXVECTOR4& color );
 
 	//整列順を設定
-	void SetAlign( const Align& align ){ m_align = align; }
+	void SetAlign( const Align& align ){ m_Align = align; }
 
 	//大きさを設定
 	//width: 幅 , height: 高さ
-	void SetSize( const float width , const float height ) { m_scale.x = width; m_scale.y = height; }
+	void SetSize( const float width , const float height ) { m_Scale.x = width; m_Scale.y = height; }
 };
 
 //書式を定義
@@ -127,7 +134,7 @@ typedef std::shared_ptr< CDebugFont > DebugFontSP;
 class CDebugFont{
 private:
 	//フォント
-	ID3DXFont* m_font;
+	ID3DXFont* m_Font;
 
 public:
 	//フォントカラー
@@ -156,7 +163,7 @@ public:
 	CDebugFont(){}
 
 	//デストラクタ
-	~CDebugFont(){ SAFE_RELEASE( m_font ); }
+	~CDebugFont(){ SAFE_RELEASE( m_Font ); }
 
 	//生成
 	//引数1:文字列の幅 , 引数2:文字列の高さ , 引数3:フォントタイプ(0:ゴシック , 1:明朝)

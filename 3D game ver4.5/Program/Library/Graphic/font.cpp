@@ -11,11 +11,11 @@
 CFont::~CFont()
 {
 	//データをすべて解放
-	for ( auto it = CFont::m_data.begin() ; it != CFont::m_data.end() ; it++ )
+	for ( auto it = CFont::m_Data.begin() ; it != CFont::m_Data.end() ; it++ )
 	{
 		SAFE_RELEASE( ( *it ).second );
 	}
-	m_data.clear();
+	m_Data.clear();
 }
 
 //描画
@@ -23,10 +23,10 @@ void CFont::Draw( const CameraBaseWP camera , const std::wstring& string , const
 {
 	HRESULT hr;
 	//zバッファのみクリア
-	V( CGraphicsManager::m_pd3dDevice->Clear( 0, NULL, D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB( 255 , 0 , 0 , 0/*255, 0, 0, 255*/ ), 1.0f, 0 ) );
+	V( CGraphicsManager::m_pD3dDevice->Clear( 0, NULL, D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB( 255 , 0 , 0 , 0/*255, 0, 0, 255*/ ), 1.0f, 0 ) );
 
 	//左上を(0,0)にする為のオフセットを定義
-	D3DXVECTOR2 offsetPt( CGraphicsManager::m_window_width * 0.5f , CGraphicsManager::m_window_height * 0.5f);
+	D3DXVECTOR2 offsetPt( CGraphicsManager::m_WindowWidth * 0.5f , CGraphicsManager::m_WindowHeight * 0.5f);
 
 	// 座標を定義
 	D3DXVECTOR3 drawPt( 0 , offsetPt.y - pos.y , 0 );
@@ -34,27 +34,27 @@ void CFont::Draw( const CameraBaseWP camera , const std::wstring& string , const
 	for( std::size_t i = 0 ; i < string.size() ; i++ )
 	{
 		// 座標を整列順に補正
-		switch(m_align)
+		switch( m_Align )
 		{
 		// 左揃え
 		case LEFT:
-			drawPt.x = pos.x + ( i * m_scale.x ) - offsetPt.x;
+			drawPt.x = pos.x + ( i * m_Scale.x ) - offsetPt.x;
 			break;
 
 		// 右揃え
 		case RIGHT:
-			drawPt.x = pos.x - ( m_scale.x * ( string.size() - 1 - i ) ) - offsetPt.x;
+			drawPt.x = pos.x - ( m_Scale.x * ( string.size() - 1 - i ) ) - offsetPt.x;
 			break;
 
 		// 真ん中揃え
 		case CENTER:
-			drawPt.x = pos.x + ( i * m_scale.x ) - ( m_scale.x * 0.5f * ( string.size() - 1 ) ) - offsetPt.x;
+			drawPt.x = pos.x + ( i * m_Scale.x ) - ( m_Scale.x * 0.5f * ( string.size() - 1 ) ) - offsetPt.x;
 			break;
 		}
-		m_pos = drawPt;
-		m_scl = m_scale;
-		m_col = color;
-		m_texs[ 0 ]->SetTex( m_data[ string.at( i ) ] );
+		m_Pos = drawPt;
+		m_Scl = m_Scale;
+		m_Col = color;
+		m_Texs[ 0 ]->SetTex( m_Data[ string.at( i ) ] );
 		//描画
 		Render( camera );
 	}
@@ -105,8 +105,8 @@ bool CFont::CreateTexture( std::size_t size , std::size_t weight , const std::ws
 		const wchar_t c = fonts.at(i);
 
 		// 多重生成を防ぐ
-		auto it = m_data.find(c);
-		if (it != m_data.end()) continue;
+		auto it = m_Data.find(c);
+		if (it != m_Data.end()) continue;
 
 		// 1 文字コード取得
 		UINT code = (UINT)c;
@@ -135,7 +135,7 @@ bool CFont::CreateTexture( std::size_t size , std::size_t weight , const std::ws
 		LPDIRECT3DTEXTURE9 texture = NULL;
 
 		//if (FAILED(device->CreateTexture(GM.gmCellIncX, TM.tmHeight, 1, D3DUSAGE_DYNAMIC, D3DFMT_A8R8G8B8, D3DPOOL_DEFAULT, &texture, NULL)))
-		if (FAILED(CGraphicsManager::m_pd3dDevice->CreateTexture(GM.gmCellIncX, TM.tmHeight, 1, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, &texture, NULL)))
+		if (FAILED(CGraphicsManager::m_pD3dDevice->CreateTexture(GM.gmCellIncX, TM.tmHeight, 1, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, &texture, NULL)))
 		{
 			MessageBox(NULL, TEXT(" !! Font Create Err 02 !! "), NULL, MB_OK | MB_ICONSTOP);
 		}
@@ -176,7 +176,7 @@ bool CFont::CreateTexture( std::size_t size , std::size_t weight , const std::ws
 		delete[] ptr;
 		
 		// データマップに登録する
-		CFont::m_data[c] = texture;
+		CFont::m_Data[c] = texture;
 	}
 	
 	// デバイスコンテキストとフォントハンドルを解放する
@@ -193,22 +193,22 @@ void CFont::Render( const CameraBaseWP camera )
 	HRESULT hr;
 
 	//ワールドマトリクス設定(ローカル座標からワールド座標へ)
-	if( m_is_billboard == true )
+	if( m_IsBillboard == true )
 	{
 		SetWldMtxBillBoard( camera );
 	}
 	else
 	{
 		//親(cube)が存在する場合は親のワールドマトリックスを渡す
-		m_cube.expired() ? SetWldMtx() : SetWldMtx( &m_cube.lock()->GetWldMtx() );
+		m_Cube.expired() ? SetWldMtx() : SetWldMtx( &m_Cube.lock()->GetWldMtx() );
 	}
-	m_wld_mtx = m_wld_mtx * camera.lock()->GetViewMatrix() * camera.lock()->GetProjectionMatrix();
+	m_WldMtx = m_WldMtx * camera.lock()->GetViewMatrix() * camera.lock()->GetProjectionMatrix();
 
 	//親が存在してかつ親の描画フラグがオフなら以下の処理を行わない
-	if( m_cube.expired() == false && m_cube.lock()->GetIsRender() == false ) return;
+	if( m_Cube.expired() == false && m_Cube.lock()->GetIsRender() == false ) return;
 
 	//カリング設定
-	CGraphicsManager::m_pd3dDevice->SetRenderState( D3DRS_CULLMODE , m_cull_state );
+	CGraphicsManager::m_pD3dDevice->SetRenderState( D3DRS_CULLMODE , m_CullState );
 
 	//シェーダ設定
 	SetSDR();
@@ -216,51 +216,51 @@ void CFont::Render( const CameraBaseWP camera )
 	//----------------------------描画処理-------------------------------
 
 	//シェーダにテクスチャを渡す
-	if( 0 != m_texs.size() )
+	if( 0 != m_Texs.size() )
 	{
-		CGraphicsManager::m_sdr_use->m_sdr->SetTexture( CGraphicsManager::m_sdr_use->m_sdr_tex , m_texs[ 0 ]->GetTex() );
-		CGraphicsManager::m_sdr_use->m_sdr->SetVector( CGraphicsManager::m_sdr_use->m_sdr_color , /*&D3DXVECTOR4( 1 , 1 , 1 , 1 )*/&D3DXVECTOR4( m_col.x , m_col.y , m_col.z , m_col.w ) );
+		CGraphicsManager::m_SdrUse->m_Sdr->SetTexture( CGraphicsManager::m_SdrUse->m_SdrTex , m_Texs[ 0 ]->GetTex() );
+		CGraphicsManager::m_SdrUse->m_Sdr->SetVector( CGraphicsManager::m_SdrUse->m_SdrColor , &D3DXVECTOR4( m_Col.x , m_Col.y , m_Col.z , m_Col.w ) );
 	}
 	//テクスチャが無ければカラーを渡す
 	else
 	{
-		CGraphicsManager::m_sdr_use->m_sdr->SetVector( CGraphicsManager::m_sdr_use->m_sdr_color , &D3DXVECTOR4( m_col.x , m_col.y , m_col.z , m_col.w ) );
+		CGraphicsManager::m_SdrUse->m_Sdr->SetVector( CGraphicsManager::m_SdrUse->m_SdrColor , &D3DXVECTOR4( m_Col.x , m_Col.y , m_Col.z , m_Col.w ) );
 	}
 
 	//シェーダの使用開始
-	CGraphicsManager::m_sdr_use->Begin();
+	CGraphicsManager::m_SdrUse->Begin();
 
 	// シェーダのパス設定
-	if( 0 != m_texs.size() )
+	if( 0 != m_Texs.size() )
 	{
-		if( !m_is_add_blend )
+		if( !m_IsAddBlend )
 		{
-			CGraphicsManager::m_sdr_use->BeginPass( 0 );
+			CGraphicsManager::m_SdrUse->BeginPass( 0 );
 		}
 		else
 		{
-			CGraphicsManager::m_sdr_use->BeginPass( 1 );
+			CGraphicsManager::m_SdrUse->BeginPass( 1 );
 		}
 	}
 	else
 	{
-		CGraphicsManager::m_sdr_use->BeginPass( 2 );
+		CGraphicsManager::m_SdrUse->BeginPass( 2 );
 	}
 
-	if( SUCCEEDED( CGraphicsManager::m_pd3dDevice->BeginScene() ) )
+	if( SUCCEEDED( CGraphicsManager::m_pD3dDevice->BeginScene() ) )
 	{
-		if(D3D_OK != m_mesh->GetMesh()->DrawSubset( 0 ))
+		if(D3D_OK != m_Mesh->GetMesh()->DrawSubset( 0 ))
 		{
 			return;
 		}
-		V( CGraphicsManager::m_pd3dDevice->EndScene() );
+		V( CGraphicsManager::m_pD3dDevice->EndScene() );
 	}
 
 	//パス終了
-	CGraphicsManager::m_sdr_use->EndPass();
+	CGraphicsManager::m_SdrUse->EndPass();
 
 	//シェーダ終了
-	CGraphicsManager::m_sdr_use->End();
+	CGraphicsManager::m_SdrUse->End();
 }
 
 //生成
@@ -300,7 +300,7 @@ void CDebugFont::Init( const int width , const int height , const int type )
 	}
 	
 	//フォント作成
-	D3DXCreateFontIndirect( CGraphicsManager::m_pd3dDevice , &FontInfo , &m_font );
+	D3DXCreateFontIndirect( CGraphicsManager::m_pD3dDevice , &FontInfo , &m_Font );
 }
 
 //描画
@@ -328,9 +328,9 @@ void CDebugFont::DrawFont( const std::string str , const int posX , const int po
 	HRESULT hr;
 
 	//テキスト描画
-	if( SUCCEEDED( CGraphicsManager::m_pd3dDevice->BeginScene() ) )
+	if( SUCCEEDED( CGraphicsManager::m_pD3dDevice->BeginScene() ) )
 	{
-		m_font->DrawText( NULL ,
+		m_Font->DrawText( NULL ,
 						  buff_name ,
 						  -1 ,
 						  &rect ,
@@ -338,6 +338,6 @@ void CDebugFont::DrawFont( const std::string str , const int posX , const int po
 						  fontcolor
 						);
 
-		V( CGraphicsManager::m_pd3dDevice->EndScene() );
+		V( CGraphicsManager::m_pD3dDevice->EndScene() );
 	}
 }

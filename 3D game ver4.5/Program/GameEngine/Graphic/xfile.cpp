@@ -24,10 +24,10 @@ XFileSP CXFile::Create( const std::string& _path )
 void CXFile::Load( const std::string& _path )
 {
 	// X ファイル とテクスチャのロード
-	m_mesh = CMesh::Create( _path ) ;
+	m_Mesh = CMesh::Create( _path ) ;
 
 	// マテリアル情報の取得
-	D3DXMATERIAL *p_materials = ( D3DXMATERIAL* )( m_mesh->GetMaterialBuff()->GetBufferPointer() ) ;
+	D3DXMATERIAL *p_materials = ( D3DXMATERIAL* )( m_Mesh->GetMaterialBuff()->GetBufferPointer() ) ;
 
 	// テクスチャのロード
 	std::stringstream ss;
@@ -35,14 +35,14 @@ void CXFile::Load( const std::string& _path )
 
 	TextureSP tex;
 
-	for( int i = 0 ; i < m_mesh->GetMaterialNum() ; i++ )
+	for( int i = 0 ; i < m_Mesh->GetMaterialNum() ; i++ )
 	{
 		memset( wc_buff , 0 , sizeof( WCHAR ) * 255 );
 		ss.str("");
 		if( NULL == p_materials[ i ].pTextureFilename )
 		{
 			tex.reset();
-			m_texs.push_back( NULL );
+			m_Texs.push_back( NULL );
 			continue;
 		}
 		ss << "Content/mesh/" << p_materials[ i ].pTextureFilename;
@@ -51,6 +51,6 @@ void CXFile::Load( const std::string& _path )
 		std::string str = ss.str().c_str();
 		tex = CTexture::Create( str );
 
-		m_texs.push_back( tex );
+		m_Texs.push_back( tex );
 	}
 }

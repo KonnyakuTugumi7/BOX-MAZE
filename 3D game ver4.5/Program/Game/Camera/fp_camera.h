@@ -16,25 +16,25 @@ typedef std::shared_ptr< CFPCamera > FPCameraSP;
 class CFPCamera : public CCameraBase{
 private:
 	//傾き度合い
-    float m_accumPitchDegrees;
+    float m_AccumPitchDegrees;
     
 	//回転速度
-    float m_rotationSpeed;
+    float m_RotationSpeed;
 
 	//加速度
-    D3DXVECTOR3 m_acceleration;
+    D3DXVECTOR3 m_Acceleration;
 
 	//今の速度
-    D3DXVECTOR3 m_currentVelocity;
+    D3DXVECTOR3 m_CurrentVelocity;
 
 	//速度
-    D3DXVECTOR3 m_velocity;
+    D3DXVECTOR3 m_Velocity;
 
 	//最大限界
-	D3DXVECTOR3 m_boundsmax;
+	D3DXVECTOR3 m_BoundsMax;
 
 	//最小限界
-	D3DXVECTOR3 m_boundsmin;
+	D3DXVECTOR3 m_BoundsMin;
 
 private:
 	//移動方向
@@ -98,25 +98,25 @@ public:
 
     //----------------------------------ゲッター----------------------------------
 
-    inline const D3DXVECTOR3 &GetAcceleration() const { return m_acceleration; }
-    inline const D3DXVECTOR3 &GetCurrentVelocity() const { return m_currentVelocity; }
-    inline const D3DXVECTOR3 &GetVelocity() const { return m_velocity; }
-	inline const float GetRotationSpeed() const { return m_rotationSpeed; }
+    inline const D3DXVECTOR3 &GetAcceleration() const { return m_Acceleration; }
+    inline const D3DXVECTOR3 &GetCurrentVelocity() const { return m_CurrentVelocity; }
+    inline const D3DXVECTOR3 &GetVelocity() const { return m_Velocity; }
+	inline const float GetRotationSpeed() const { return m_RotationSpeed; }
     
     //----------------------------------セッター----------------------------------
 
 	inline void SetPosition( const D3DXVECTOR3& eye )
 	{
-		m_eye = eye;
+		m_Eye = eye;
 
 		//ビュー行列を更新
 		UpdateViewMatrix();
 	}
 	inline void SetPosition( const float x , const float y , const float z )
 	{
-		m_eye.x = x;
-		m_eye.y = y;
-		m_eye.z = z;
+		m_Eye.x = x;
+		m_Eye.y = y;
+		m_Eye.z = z;
 
 		//ビュー行列を更新
 		UpdateViewMatrix();
@@ -129,12 +129,12 @@ public:
 		D3DXMatrixRotationQuaternion( &m , &orientation );
 
 		//傾き度合い
-		m_accumPitchDegrees = D3DXToDegree( asinf( m( 1 , 2 ) ) );
+		m_AccumPitchDegrees = D3DXToDegree( asinf( m( 1 , 2 ) ) );
 
 		//新しい方位をセット
-		m_orientation = orientation;
+		m_Orientation = orientation;
 
-		LookAt( m_eye , m_eye + m_viewDir , WORLD_YAXIS );
+		LookAt( m_Eye , m_Eye + m_ViewDir , WORLD_YAXIS );
 
 		//ビュー行列を更新
 		UpdateViewMatrix();

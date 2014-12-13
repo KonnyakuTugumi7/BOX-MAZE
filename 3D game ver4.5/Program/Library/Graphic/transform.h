@@ -21,44 +21,44 @@ protected:
 	};
 
 	//回転タイプ
-	int m_rot_type;
+	int m_RotType;
 
 	//半径 //地球のモデルの半径の適当な値(0.5f)
-	float m_rad;
+	float m_Rad;
 	
 	//姿勢
 	//現状は VEC3 だが姿勢は
 	//ベクトル、行列、クォータニオンのどれでも
 	//制御できるようにすべし
-	D3DXVECTOR3 m_rot;
+	D3DXVECTOR3 m_Rot;
 		
 	//回転行列(x)
-	D3DXMATRIX m_rot_x;
+	D3DXMATRIX m_RotX;
 	
 	//回転行列(y)
-	D3DXMATRIX m_rot_y;
+	D3DXMATRIX m_RotY;
 
 	//回転行列(z)
-	D3DXMATRIX m_rot_z;
+	D3DXMATRIX m_RotZ;
 
 	//クォータニオン
-	D3DXQUATERNION m_rot_qtn;
+	D3DXQUATERNION m_RotQtn;
 
 	//ワールドマトリックス(ワールド空間を基準とした時の姿勢)
-	D3DXMATRIX m_wld_mtx;
+	D3DXMATRIX m_WldMtx;
 
 public:
 	//座標
-	D3DXVECTOR3 m_pos;
+	D3DXVECTOR3 m_Pos;
 
 	//前のフレームの座標
-	D3DXVECTOR3 m_prev_pos;
+	D3DXVECTOR3 m_PrevPos;
 
 	//スケール
-	D3DXVECTOR3 m_scl;
+	D3DXVECTOR3 m_Scl;
 
 	//回転行列
-	D3DXMATRIX m_rot_mtx;
+	D3DXMATRIX m_RotMtx;
 
 public:
 	//コンストラクタ
@@ -68,7 +68,7 @@ public:
 	virtual ~CTransform(){}
 
 	//ワールドマトリックスゲッター
-	D3DXMATRIX GetWldMtx(){ return m_wld_mtx; }
+	D3DXMATRIX GetWldMtx(){ return m_WldMtx; }
 
 	//ワールドマトリックスを設定
 	//引数1:親のワールドマトリックス

@@ -18,23 +18,23 @@ typedef std::shared_ptr< CCsvPlatinum > CsvPlatinumSP;
 class CCsvPlatinum : public CCsv{
 private:
 	//マップの横幅
-	int m_width;
+	int m_Width;
 
 	//マップの奥行
-	int m_depth;
+	int m_Depth;
 
 	//マップチップ1つの幅(pixel)
-	int m_chip_width;
+	int m_ChipWidth;
 
 	//マップチップ1つの高さ(pixel)
-	int m_chip_height;
+	int m_ChipHeight;
 
 	//レイヤーの数
-	int m_layer_num;
+	int m_LayerNum;
 
 	//レイヤーインデックス
 	//レイヤー0を抜かしたインデックスが昇順で格納されていく
-	std::vector< int > m_layer_idx;
+	std::vector< int > m_LayerIdx;
 
 public:
 	//コンストラクタ(新しくステージを作るとき)
@@ -45,25 +45,25 @@ public:
 	CCsvPlatinum( const std::string& file_path )
 	{
 		//ファイルパス
-		m_path = file_path;
+		m_Path = file_path;
 
 		//CSVファイル読み込み
 		ImportFile( file_path );
 
 		//マップの幅
-		m_width = GetToken< int >( 0 , 0 );
+		m_Width = GetToken< int >( 0 , 0 );
 
 		//マップの奥行
-		m_depth = GetToken< int >( 0 , 1 );
+		m_Depth = GetToken< int >( 0 , 1 );
 
 		//レイヤーの数
-		m_layer_num = GetToken< int >( 0 , 4 );
+		m_LayerNum = GetToken< int >( 0 , 4 );
 
 		for( int i = 0 ; i < GetNumLine() ; i++ )
 		{
 			if( GetToken< std::string >( i , 0 ) == "" )
 			{
-				m_layer_idx.push_back( i );
+				m_LayerIdx.push_back( i );
 			}
 		}
 	}
@@ -73,7 +73,7 @@ public:
 	{
 		//解放
 		EraseToken();
-		m_layer_idx.clear();
+		m_LayerIdx.clear();
 	}
 
 	//生成
@@ -86,7 +86,7 @@ public:
 	virtual int FindSpecifiedTokenNum( const std::string token )
 	{
 		int num = 0;
-		for( int line = 1 ; line < GetNumLine() ; ++line ) num += std::count( m_csv_table[ line ].begin() , m_csv_table[ line ].end() , token );
+		for( int line = 1 ; line < GetNumLine() ; ++line ) num += std::count( m_CsvTable[ line ].begin() , m_CsvTable[ line ].end() , token );
 		
 		return num;
 	}
@@ -103,16 +103,16 @@ public:
 		}
 		else
 		{
-			return m_layer_idx[ layer - 1 ] + 1;
+			return m_LayerIdx[ layer - 1 ] + 1;
 		}
 	}
 
 	//マップ幅ゲッター
-	inline int GetMapWidth(){ return m_width; }
+	inline int GetMapWidth(){ return m_Width; }
 
 	//マップ奥行ゲッター
-	inline int GetMapDepth(){ return m_depth; }
+	inline int GetMapDepth(){ return m_Depth; }
 
 	//レイヤー数ゲッター
-	inline int GetLayerNum(){ return m_layer_num; }
+	inline int GetLayerNum(){ return m_LayerNum; }
 };

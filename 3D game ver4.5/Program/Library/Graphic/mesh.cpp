@@ -5,27 +5,27 @@
 #include "../../Library/Graphic/vertex.h"
 
 //meshクラスの静的メンバの実態
-std::map< std::string , MeshSP > CMesh::m_meshs;
+std::map< std::string , MeshSP > CMesh::m_Meshs;
 
 //メッシュを生成
 MeshSP CMesh::Create( const std::string& _path )
 {
 	// 管理マップから既にメモリ上に存在しないか重複チェック
-	std::map< std::string, MeshSP >::iterator it = m_meshs.find( _path ) ;
+	std::map< std::string, MeshSP >::iterator it = m_Meshs.find( _path ) ;
 
 	// 存在しなければ新しくロード
-	if( it == m_meshs.end() )
+	if( it == m_Meshs.end() )
 	{
 		//メッシュ
 		MeshSP meshSP = std::make_shared< CMesh >();
-		meshSP->m_name = _path ;
+		meshSP->m_Name = _path ;
 		WCHAR wc_buff[ 255 ] = { 0 } ;
 
 		CCommon::DXconvAnsiToWide( wc_buff, _path.c_str(), 255 ) ;
-		D3DXLoadMeshFromX( wc_buff, D3DXMESH_MANAGED, CGraphicsManager::m_pd3dDevice, NULL, &meshSP->m_material_buff, NULL, &meshSP->m_material_num, &meshSP->m_directx_mesh ) ;
+		D3DXLoadMeshFromX( wc_buff, D3DXMESH_MANAGED, CGraphicsManager::m_pD3dDevice, NULL, &meshSP->m_MaterialBuff, NULL, &meshSP->m_MaterialNum, &meshSP->m_DirectxMesh ) ;
 
 		// 管理マップに登録
-		m_meshs.insert( std::make_pair( _path , meshSP ) ) ;
+		m_Meshs.insert( std::make_pair( _path , meshSP ) ) ;
 
 		return meshSP;
 	}
@@ -38,20 +38,20 @@ MeshSP CMesh::Create( const std::string& _path )
 MeshSP CMesh::CreateFromFVF( const std::string _path )
 {
 	// 管理マップから既にメモリ上に存在しないか重複チェック
-	std::map< std::string, MeshSP >::iterator it = m_meshs.find( _path ) ;
+	std::map< std::string, MeshSP >::iterator it = m_Meshs.find( _path ) ;
 
 	// 存在しなければ新しくロード
-	if( it == m_meshs.end() )
+	if( it == m_Meshs.end() )
 	{
 		//メッシュ
 		MeshSP meshSP = std::make_shared< CMesh >();
-		meshSP->m_name = _path;
+		meshSP->m_Name = _path;
 
 		//メッシュ生成	  //メッシュの面の数	//メッシュの頂点の数
-		D3DXCreateMeshFVF( 2 , 4 , D3DXMESH_MANAGED , CVertex::FVF , CGraphicsManager::m_pd3dDevice , &meshSP->m_directx_mesh );
+		D3DXCreateMeshFVF( 2 , 4 , D3DXMESH_MANAGED , CVertex::FVF , CGraphicsManager::m_pD3dDevice , &meshSP->m_DirectxMesh );
 
 		// 管理マップに登録
-		m_meshs.insert( std::make_pair( _path , meshSP ) ) ;
+		m_Meshs.insert( std::make_pair( _path , meshSP ) ) ;
 
 		return meshSP;
 	}
@@ -64,43 +64,43 @@ MeshSP CMesh::CreateFromFVF( const std::string _path )
 MeshSP CMesh::Regist( const std::string& _path, MeshSP p_mesh )
 {
 	// 管理マップから既にメモリ上に存在しないか重複チェック
-	std::map< std::string, MeshSP >::iterator it = m_meshs.find( _path ) ;
+	std::map< std::string, MeshSP >::iterator it = m_Meshs.find( _path ) ;
 
 	// 存在しなければ新しくロード
-	if( it == m_meshs.end() )
+	if( it == m_Meshs.end() )
 	{
 		// 管理マップに登録
-		m_meshs.insert( std::make_pair( _path , p_mesh ) ) ;
+		m_Meshs.insert( std::make_pair( _path , p_mesh ) ) ;
 	}
 
 	return p_mesh;
 }
 
 // メッシュの解放
-void CMesh::Destroy( const std::string m_name )
+void CMesh::Destroy( const std::string _name )
 {
-	std::map< std::string, MeshSP >::iterator it = m_meshs.begin() ;
+	std::map< std::string, MeshSP >::iterator it = m_Meshs.begin() ;
 
 	// 全部解放
-	if( m_name == "all" )
+	if( _name == "all" )
 	{
-		while( it != m_meshs.end() )
+		while( it != m_Meshs.end() )
 		{
-			SAFE_RELEASE( (it->second)->m_directx_mesh ) ;
-			SAFE_RELEASE( (it->second)->m_material_buff ) ;
+			SAFE_RELEASE( (it->second)->m_DirectxMesh ) ;
+			SAFE_RELEASE( (it->second)->m_MaterialBuff ) ;
 			it->second.reset();
-			m_meshs.erase( it++ ) ;
+			m_Meshs.erase( it++ ) ;
 		}
 		//マップをクリア
-		m_meshs.clear();
+		m_Meshs.clear();
 	}//テクスチャを１つだけ解放
 	else
 	{
-		it = m_meshs.find( m_name ) ;
-		if( it != m_meshs.end() )
+		it = m_Meshs.find( _name ) ;
+		if( it != m_Meshs.end() )
 		{
-			SAFE_RELEASE( (it->second)->m_directx_mesh ) ;
-			SAFE_RELEASE( (it->second)->m_material_buff ) ;
+			SAFE_RELEASE( (it->second)->m_DirectxMesh ) ;
+			SAFE_RELEASE( (it->second)->m_MaterialBuff ) ;
 			it->second.reset();
 		}
 	}

@@ -23,22 +23,22 @@ typedef std::vector< CUBE2 > CUBE3;
 class CCubeManager{
 private:
 	//現在のステージ名(全ステージクリア判定で使う)
-	std::string m_stage_name;
+	std::string m_StageName;
 
 	//スタートキューブの座標保存用
-	D3DXVECTOR3 m_start_pos;
+	D3DXVECTOR3 m_StartPos;
 
 	//ゴールキューブの座標保存用
-	D3DXVECTOR3 m_goal_pos;
+	D3DXVECTOR3 m_GoalPos;
 
 public:
 	//キューブの３次元配列
-	CUBE3 m_cubes;
+	CUBE3 m_Cubes;
 
-	std::vector< std::vector<std::vector< D3DXVECTOR3 > > > m_cubes_pos;
+	std::vector< std::vector<std::vector< D3DXVECTOR3 > > > m_CubesPos;
 
 	//CSVPlatinum
-	CsvPlatinumSP m_csv_platinum;
+	CsvPlatinumSP m_CsvPlatinum;
 
 	//キューブの種類
 	enum CUBE_STATE{
@@ -65,11 +65,11 @@ public:
 	int FindSpecifiedCubeNum( const CUBE_STATE cube );
 
 	//ステージ名ゲッター
-	std::string GetStageName(){ return m_stage_name; }
+	std::string GetStageName(){ return m_StageName; }
 
 	//スタートキューブ座標ゲッター
-	D3DXVECTOR3 GetStartPos(){ return m_start_pos; }
+	D3DXVECTOR3 GetStartPos(){ return m_StartPos; }
 
 	//ゴールキューブ座標ゲッター
-	D3DXVECTOR3 GetGoalPos(){ return m_goal_pos; }
+	D3DXVECTOR3 GetGoalPos(){ return m_GoalPos; }
 };

@@ -1,10 +1,14 @@
+//circle_width , height
+350 , 350
 //circle_pos
-730 , 70
+330 , 230
 //circle_alpha
 0.2
-//circle_scl
-1.5
-//arrow_alpha_
+//arrow_width , height
+225 , 225
+//arrow_pos
+330 , 230
+//arrow_alpha
 0.5
 //flash_min
 0.2

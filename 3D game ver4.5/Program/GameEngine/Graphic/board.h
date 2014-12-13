@@ -18,13 +18,13 @@ typedef std::shared_ptr< CBoard > BoardSP;
 class CBoard : public CGraphicBase{
 protected:
 	//ビルボード判定フラグ
-	bool m_is_billboard;
+	bool m_IsBillboard;
 
 	//板ポリサイズ
-	D3DXVECTOR3 m_board_size;
+	D3DXVECTOR3 m_BoardSize;
 
 	//キューブのウィクポ・・・Cube(親)のワールドマトリックスを取得するため
-	std::weak_ptr< CCube > m_cube;
+	std::weak_ptr< CCube > m_Cube;
 
 public:
 	//コンストラクタ
@@ -54,7 +54,7 @@ public:
 	void SetWldMtxBillBoard( const CameraBaseWP camera );
 
 	//キューブウィークポインタセッター
-	inline void SetCubeWP( const std::weak_ptr< CCube > cube ){ m_cube = cube; }
+	inline void SetCubeWP( const std::weak_ptr< CCube > cube ){ m_Cube = cube; }
 
 	//テクスチャセッター
 	//引数1:テクスチャ(板ポリには今のところ一枚につき一つのテクスチャしか設定していないのでこれでおk)

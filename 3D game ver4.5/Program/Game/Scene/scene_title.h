@@ -35,19 +35,19 @@ private:
 	};
 
 	//ステージ選択画面かどうか
-	bool m_is_stage_select;
+	bool m_IsStageSelect;
 
 	//タイトル管理番号
-	int m_scene_num;
+	int m_SceneNum;
 
 	//タイトル画像
-	SpriteSP m_back;
-	BoardSP m_board;
+	BoardSP m_Back;
 
 	//タイトルロゴ
-	FontSP m_font;
-	std::vector< std::wstring > m_logo;
-	std::vector< std::wstring > m_select_logo;
+	FontSP m_Font;
+	//タイトルロゴ文字列
+	std::vector< std::wstring > m_Logo;
+	std::vector< std::wstring > m_SelectLogo;
 
 public:
 	//インスタンス作成

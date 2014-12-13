@@ -8,47 +8,47 @@
 #pragma warning ( disable : 4240 ) //非標準の拡張機能が使用されています。
 #pragma warning ( disable : 4238 ) //非標準の拡張機能が使用されています。: 右辺値のクラスが左辺値に使用されます。
 
-//視錐台クラス
-class CViewFrustum{
-public:
-	//視錐台の各面
-	D3DXPLANE m_left;
-	D3DXPLANE m_right;
-	D3DXPLANE m_top;
-	D3DXPLANE m_bottom;
-	D3DXPLANE m_near;
-	D3DXPLANE m_far;
-
-public:
-	//コンストラクタ
-	CViewFrustum(){}
-
-	//デストラクタ
-	~CViewFrustum(){}
-
-	//コピーコンストラクタ
-	CViewFrustum( const CViewFrustum& frustum )
-	{
-		m_left = frustum.m_left;
-		m_right = frustum.m_right;
-		m_top = frustum.m_top;
-		m_bottom = frustum.m_bottom;
-		m_near = frustum.m_near;
-		m_far = frustum.m_far;
-	}
-
-	// = 演算子のオーバーロード
-	inline CViewFrustum& operator = (const CViewFrustum& frustum)
-	{
-		m_left = frustum.m_left;
-		m_right = frustum.m_right;
-		m_top = frustum.m_top;
-		m_bottom = frustum.m_bottom;
-		m_near = frustum.m_near;
-		m_far = frustum.m_far;
-		return ( *this );
-	}
-};
+////視錐台クラス
+//class CViewFrustum{
+//public:
+//	//視錐台の各面
+//	D3DXPLANE m_left;
+//	D3DXPLANE m_right;
+//	D3DXPLANE m_top;
+//	D3DXPLANE m_bottom;
+//	D3DXPLANE m_near;
+//	D3DXPLANE m_far;
+//
+//public:
+//	//コンストラクタ
+//	CViewFrustum(){}
+//
+//	//デストラクタ
+//	~CViewFrustum(){}
+//
+//	//コピーコンストラクタ
+//	CViewFrustum( const CViewFrustum& frustum )
+//	{
+//		m_left = frustum.m_left;
+//		m_right = frustum.m_right;
+//		m_top = frustum.m_top;
+//		m_bottom = frustum.m_bottom;
+//		m_near = frustum.m_near;
+//		m_far = frustum.m_far;
+//	}
+//
+//	// = 演算子のオーバーロード
+//	inline CViewFrustum& operator = (const CViewFrustum& frustum)
+//	{
+//		m_left = frustum.m_left;
+//		m_right = frustum.m_right;
+//		m_top = frustum.m_top;
+//		m_bottom = frustum.m_bottom;
+//		m_near = frustum.m_near;
+//		m_far = frustum.m_far;
+//		return ( *this );
+//	}
+//};
 
 class CCameraBase;
 typedef std::shared_ptr< CCameraBase > CameraBaseSP;
@@ -63,57 +63,57 @@ protected:
 
 public:
 	//座標
-    D3DXVECTOR3 m_eye;
+    D3DXVECTOR3 m_Eye;
 
 	//前フレームの座標
-	D3DXVECTOR3 m_prev_eye;
+	D3DXVECTOR3 m_PrevEye;
 
 protected:
 	//重力をかけるかどうか
-	bool m_is_gravity;
+	bool m_IsGravity;
 
 	//地面(物体の上面)接地フラグ
-	bool m_is_on_ground;
+	bool m_IsOnGround;
 
 	//Y軸移動量
-	float m_jump_movement;
+	float m_JumpMovement;
 
 	//AABBの各軸の長さ(当たり判定)
-	D3DXVECTOR3 m_length;
+	D3DXVECTOR3 m_Length;
 
 	//注視点(look)
-    D3DXVECTOR3 m_target;
+    D3DXVECTOR3 m_Target;
     
 	//X軸
-    D3DXVECTOR3 m_xAxis;
+    D3DXVECTOR3 m_XAxis;
 
 	//Y軸
-    D3DXVECTOR3 m_yAxis;
+    D3DXVECTOR3 m_YAxis;
 
 	//Z軸
-    D3DXVECTOR3 m_zAxis;
+    D3DXVECTOR3 m_ZAxis;
 
 	//視野方向
-    D3DXVECTOR3 m_viewDir;
+    D3DXVECTOR3 m_ViewDir;
 
 	//方位
-    D3DXQUATERNION m_orientation;
+    D3DXQUATERNION m_Orientation;
 	
 	//ビュー行列
-    D3DXMATRIX m_viewMatrix;
+    D3DXMATRIX m_ViewMatrix;
 
 	//プロジェクション(投影)行列
-    D3DXMATRIX m_projMatrix;
+    D3DXMATRIX m_ProjMatrix;
 
 	//CSV
-	CsvSP m_csv;
+	CsvSP m_Csv;
 
 public:
 	//コンストラクタ
     CCameraBase();
 
 	//デストラクタ
-	virtual ~CCameraBase(){ m_csv.reset(); };
+	virtual ~CCameraBase(){ m_Csv.reset(); };
 
 	//注視点移動
 	//引数1:注視点
@@ -140,18 +140,18 @@ public:
 
     //----------------------------------ゲッター----------------------------------
 
-    inline const D3DXVECTOR3 &GetPosition() const { return m_eye; }
-	inline const D3DXVECTOR3 GetSize() const { return m_length; }
-	inline const D3DXVECTOR3 GetViewDir() const { return m_viewDir; }
-	inline const D3DXVECTOR3 GetViewTarget() const { return m_target; }
-	inline const D3DXMATRIX &GetViewMatrix() const { return m_viewMatrix; }
-	inline const D3DXMATRIX &GetProjectionMatrix() const { return m_projMatrix; }
-	inline const float GetJumpMovement() const { return m_jump_movement; }
-	CViewFrustum GetViewFrustum();
+    inline const D3DXVECTOR3 &GetPosition() const { return m_Eye; }
+	inline const D3DXVECTOR3 GetSize() const { return m_Length; }
+	inline const D3DXVECTOR3 GetViewDir() const { return m_ViewDir; }
+	inline const D3DXVECTOR3 GetViewTarget() const { return m_Target; }
+	inline const D3DXMATRIX &GetViewMatrix() const { return m_ViewMatrix; }
+	inline const D3DXMATRIX &GetProjectionMatrix() const { return m_ProjMatrix; }
+	inline const float GetJumpMovement() const { return m_JumpMovement; }
+	//CViewFrustum GetViewFrustum();
 
 	//----------------------------------セッター----------------------------------
 
-	inline void SetIsGravity( const bool flg ){ m_is_gravity = flg; }
-	inline void SetIsOnGround( const bool flg ){ m_is_on_ground = flg; }
-	inline void SetJumpMovement( const float jump_movement ){ m_jump_movement = jump_movement; }
+	inline void SetIsGravity( const bool flg ){ m_IsGravity = flg; }
+	inline void SetIsOnGround( const bool flg ){ m_IsOnGround = flg; }
+	inline void SetJumpMovement( const float jump_movement ){ m_JumpMovement = jump_movement; }
 };

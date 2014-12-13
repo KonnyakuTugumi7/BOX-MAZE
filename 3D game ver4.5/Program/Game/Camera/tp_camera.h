@@ -13,16 +13,16 @@ typedef std::shared_ptr< CTPCamera > TPCameraSP;
 class CTPCamera : public CCameraBase{
 private:
 	//経度
-    float m_longitudeDegrees;
+    float m_LongitudeDegrees;
 
 	//緯度
-    float m_latitudeDegrees;
+    float m_LatitudeDegrees;
 
 	//回転速度
-	float m_rot_speed;
+	float m_RotSpeed;
 
 	//カメラと注視点のオフセット(ターゲットからカメラへのベクトル)
-    D3DXVECTOR3 m_offset;
+    D3DXVECTOR3 m_Offset;
 
 public:
 	//コンストラクタ

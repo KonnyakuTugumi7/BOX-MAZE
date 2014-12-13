@@ -13,27 +13,27 @@ typedef std::shared_ptr< CTime > TimeSP;
 class CTime{
 private:
 	//計測時間
-	int m_measuring_time;
+	int m_MeasuringTime;
 
 	//計測開始時間
-    float m_start;
+    float m_Start;
 
 	//計測経過時間
-	float m_elapsed;
+	float m_Elapsed;
 
 public:
 	//コンストラクタ
 	//単純に経過時間を計測する用
-    CTime() : m_start( 0.0f ) , 
-			  m_elapsed( 0.0f )
+    CTime() : m_Start( 0.0f ) , 
+			  m_Elapsed( 0.0f )
 	{}
 
 	//コンストラクタ
 	//時間制限を設けたタイマー用
 	//引数1：計測時間
-	CTime( const int time ) : m_measuring_time( time ) , 
-							   m_start( 0.0f ) , 
-							   m_elapsed( 0.0f )
+	CTime( const int time ) : m_MeasuringTime( time ) , 
+							   m_Start( 0.0f ) , 
+							   m_Elapsed( 0.0f )
 	{}
 
 	//デストラクタ
@@ -48,37 +48,37 @@ public:
     void Start()
     {
 		//計測開始時間を保存
-		m_start = ( float )GetTickCount();
+		m_Start = ( float )GetTickCount();
 		//計測経過時間をリセット
-		m_elapsed = 0.0f;
+		m_Elapsed = 0.0f;
     }
 
 	//時間を計測する
 	bool Update()
 	{
 		float end = ( float )GetTickCount();
-		m_elapsed = ( end - m_start ) / 1000;
+		m_Elapsed = ( end - m_Start ) / 1000;
 
 		//計測時間まで達したかどうか
-		return ( m_elapsed > m_measuring_time );
+		return ( m_Elapsed > m_MeasuringTime );
 	}
 
 	//経過時間をstringにして返す
 	std::string ElapsedToString()
 	{
 		std::stringstream ss;
-		ss << m_elapsed;
+		ss << m_Elapsed;
 		return ss.str();
 	}
 
 	//-------------------------------セッター------------------------------
 
-	inline void SetTimer( const int time ){ m_measuring_time = time; }
+	inline void SetTimer( const int time ){ m_MeasuringTime = time; }
 
 	//------------------------------ゲッター-------------------------------
 
-	inline const int& GetMeasuringTime() const { return m_measuring_time; }
+	inline const int& GetMeasuringTime() const { return m_MeasuringTime; }
 
-	inline const float& GetElapsed() const { return m_elapsed; }
+	inline const float& GetElapsed() const { return m_Elapsed; }
 
 };

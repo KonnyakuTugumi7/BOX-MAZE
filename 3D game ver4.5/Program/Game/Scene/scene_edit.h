@@ -19,30 +19,29 @@ typedef std::shared_ptr< CSceneEdit > SceneEditSP;
 class CSceneEdit : public CSceneBase{
 private:
 	//キューブマネージャ
-	CubeManagerSP m_cube_manager;
+	CubeManagerSP m_CubeManager;
 
 	//選択キューブ
-	CubeSP m_select_cube;
+	CubeSP m_SelectCube;
 
 	//画面中央の十字カーソル
-	SpriteSP m_center_carsor;
-
-	DebugFontSP m_debug_font;
+	BoardSP m_CenterCarsor;
 
 	//フォント
-	FontSP m_font;
-	std::vector< std::wstring > m_logo;
+	FontSP m_Font;
+	std::vector< std::wstring > m_Logo;
+
 	//カメラ
-	ViewCameraSP m_view_camera;
+	ViewCameraSP m_ViewCamera;
 
 	//選択キューブ管理ナンバー
-	int m_select_cube_state;
+	int m_SelectCubeState;
 
-	//ターゲット移動速度
-	float m_move_speed;
+	////ターゲット移動速度
+	//float m_MoveSpeed;
 
 	//ターゲット座標
-	D3DXVECTOR3 m_pos;
+	D3DXVECTOR3 m_Pos;
 
 public:
 	//インスタンス作成

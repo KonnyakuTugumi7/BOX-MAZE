@@ -4,56 +4,56 @@
 
 //コンストラクタ
 CAnimation::CAnimation() : 
-	m_img_size( 0 , 0 , 0 ) , 
-	m_center( 0 , 0 , 0 ) , 
-	m_animation_frame( 0 ) ,
-	m_is_loop( true ) ,
-	m_is_active( true ) 
+	m_ImgSize( 0 , 0 , 0 ) , 
+	m_Center( 0 , 0 , 0 ) , 
+	m_AnimationFrame( 0 ) ,
+	m_IsLoop( true ) ,
+	m_IsActive( true ) 
 {
-	m_animation_timer = std::make_shared< CTime >( 2 );
+	m_AnimationTimer = std::make_shared< CTime >( 2 );
 }
 
 //デストラクタ
 CAnimation::~CAnimation()
 {
 	//解放
-	SAFE_RELEASE( m_texture );
-	m_rect.clear();
-	m_animation_timer.reset();
+	SAFE_RELEASE( m_Texture );
+	m_Rect.clear();
+	m_AnimationTimer.reset();
 }
 
 //再生
 void CAnimation::Play()
 {
 	//描画フラグがオフの時以下の処理を行わない
-	if( m_is_active == false ) return;
+	if( m_IsActive == false ) return;
 
 	//分割なしで読み込んだ時以下の処理を行わない
-	if( m_rect.size() == 1 ) return;
+	if( m_Rect.size() == 1 ) return;
 
 	//アニメーションカウントを進める
-	if( m_animation_timer->Update() == true )
+	if( m_AnimationTimer->Update() == true )
 	{
 		//次の画像に進む(画像の分割数まで)
-		++m_animation_frame;
+		++m_AnimationFrame;
 
 		//カウントをリセット
-		m_animation_timer->Start();
+		m_AnimationTimer->Start();
 	}
 
 	//単発
-	if( m_is_loop == false && m_rect.size() == m_animation_frame )
+	if( m_IsLoop == false && m_Rect.size() == m_AnimationFrame )
 	{
 		//描画フラグをオフにする
-		m_is_active = false;
+		m_IsActive = false;
 
 		//アニメーションフレームを最初に戻す
-		m_animation_frame = 0;
+		m_AnimationFrame = 0;
 			 
 		//カウントをリセット
-		m_animation_timer->Start();
+		m_AnimationTimer->Start();
 	}
 
 	//アニメフレーム番号をループさせる
-	m_animation_frame %= m_rect.size();
+	m_AnimationFrame %= m_Rect.size();
 }
